@@ -189,6 +189,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-o
 
 /* work animations (props in scene) */
 .scene *{transform-box:view-box}
+.p-stream{animation:pstream .5s linear infinite}@keyframes pstream{to{stroke-dashoffset:-16}}.p-stream.d2{animation-duration:.7s}.p-tilt{animation:ptilt 1.2s ease-in-out infinite alternate}@keyframes ptilt{from{transform:rotate(-4deg)}to{transform:rotate(8deg)}}.p-fire{transform-box:fill-box;transform-origin:50% 100%;animation:pfire .35s ease-in-out infinite alternate}.p-fire.d2{animation-delay:.15s}@keyframes pfire{from{transform:scaleY(.85)}to{transform:scaleY(1.15)}}
 .p-sw{animation:psw .9s ease-in-out infinite alternate}
 @keyframes psw{from{transform:rotate(-30deg)}to{transform:rotate(14deg)}}
 .p-ham{animation:pham .55s cubic-bezier(.5,0,.8,.4) infinite alternate}
@@ -1061,92 +1062,98 @@ function durTxt(h){const m=Math.round(h*60);return m>=60?`${Math.floor(m/60)} gi
 function realTxt(sec){sec=Math.ceil(sec);if(sec<60)return `${sec} giây`;return `${Math.floor(sec/60)} phút ${sec%60} giây`}
 
 /* ---------- Chibi ---------- */
-/* Công tử áo lam: búi tóc buộc ruy băng lam, áo lam khoác ngoài trắng, cầm quạt */
+/* Mặt chibi dùng chung: mắt to long lanh, nhiều biểu cảm */
+function chFace(o,E){
+  const lash='#1c1720',ey=(x,f)=>`<g><path d="M${x-6.2} 45.5 Q${x} 40 ${x+6.2} 45.5 L${x+5.6} 53 Q${x} 57.4 ${x-5.6} 53 Z" fill="${E.d}"/><ellipse cx="${x}" cy="51.2" rx="4.4" ry="4.1" fill="${E.i}"/><ellipse cx="${x}" cy="53" rx="3" ry="1.9" fill="${E.h}" opacity=".85"/>
+    <circle cx="${x+1.9}" cy="46.8" r="2.3" fill="#fff"/><circle cx="${x-2.3}" cy="53.2" r="1.05" fill="#fff"/>
+    <path d="M${x-7.2} 46 Q${x} 38.6 ${x+7.2} 45" stroke="${lash}" stroke-width="2.3" fill="none" stroke-linecap="round"/><path d="M${x+(f?-7.2:7.2)} ${f?46:45} l${f?-2.4:2.4} -2" stroke="${lash}" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M${x-3.8} 56.6 Q${x} 57.9 ${x+3.8} 56.6" stroke="#9a7a70" stroke-width=".9" fill="none"/></g>`;
+  const arc=(x,up)=>`<path d="M${x-6} ${up?51:49} Q${x} ${up?44.5:54.5} ${x+6} ${up?51:49}" stroke="${lash}" stroke-width="2.4" fill="none" stroke-linecap="round"/>`;
+  let eyes,brow='',mouth,ext='';
+  const bn=`<path d="M33 35 Q38 33 43 34 M57 34 Q62 33 67 35" stroke="${E.b}" stroke-width="1.3" fill="none" stroke-linecap="round"/>`;
+  if(o.sleep){eyes=arc(38,0)+arc(62,0);brow=bn;mouth='<path d="M47.5 61 Q50 62.6 52.5 61" stroke="#a24a4e" stroke-width="1.5" fill="none" stroke-linecap="round"/>'}
+  else if(o.happy){eyes=arc(38,1)+arc(62,1);brow=bn;mouth='<path d="M45.5 59.5 Q50 66 54.5 59.5 Z" fill="#c0545a"/><path d="M47 62.8 Q50 64.6 53 62.8" stroke="#f29aa0" stroke-width="1.4" fill="none"/>'}
+  else if(o.shy){eyes=`<path d="M32 50 q6 -3 12 0 M56 50 q6 -3 12 0" stroke="${lash}" stroke-width="2.3" fill="none" stroke-linecap="round"/>`;brow='<path d="M33 37 L43 35 M67 37 L57 35" stroke="'+E.b+'" stroke-width="1.3" stroke-linecap="round"/>';mouth='<path d="M46 61 q2 -2 4 0 q2 2 4 0" stroke="#a24a4e" stroke-width="1.4" fill="none" stroke-linecap="round"/>';ext='<path d="M27 55 l3 -3 M31 56 l3 -3 M35 57 l3 -3 M62 54 l3 3 M66 53 l3 3 M70 54 l3 3" stroke="#e57c86" stroke-width="1.2" stroke-linecap="round"/><ellipse cx="31" cy="57" rx="7" ry="3.6" fill="#f58a98" opacity=".55"/><ellipse cx="69" cy="57" rx="7" ry="3.6" fill="#f58a98" opacity=".55"/>'}
+  else{eyes=ey(38,1)+ey(62,0);
+    brow=o.angry?`<path d="M31 37 L44 42 M69 37 L56 42" stroke="${E.b}" stroke-width="2.6" stroke-linecap="round"/>`:o.tear?`<path d="M32 40 L44 36.5 M68 40 L56 36.5" stroke="${E.b}" stroke-width="2" stroke-linecap="round"/>`:o.wow?`<path d="M32 33 Q38 30 44 32 M56 32 Q62 30 68 33" stroke="${E.b}" stroke-width="1.5" fill="none" stroke-linecap="round"/>`:bn;
+    mouth=o.shout?'<ellipse cx="50" cy="62" rx="3.8" ry="4.4" fill="#b8464c"/><ellipse cx="50" cy="63.8" rx="2.3" ry="1.6" fill="#f2949a"/>':o.wow?'<ellipse cx="50" cy="62" rx="2.8" ry="3.4" fill="#b8464c"/><ellipse cx="50" cy="63.2" rx="1.7" ry="1.2" fill="#f2949a"/>':o.tear?'<path d="M46.5 63 Q50 59.8 53.5 63" stroke="#a24a4e" stroke-width="1.6" fill="none" stroke-linecap="round"/>':o.angry?'<path d="M46.5 62 h7" stroke="#a24a4e" stroke-width="1.8" stroke-linecap="round"/>':'<path d="M47.2 61 Q50 63.4 52.8 61" stroke="#a24a4e" stroke-width="1.6" fill="none" stroke-linecap="round"/>';
+    if(o.tear)ext='<path d="M34.5 57 q-3 7 0 10 q3 -3 0 -10z M65.5 57 q-3 7 0 10 q3 -3 0 -10z" fill="#9fd4ff"/>';
+    if(o.angry)ext='<path d="M70 26 l5 -1 l-1 5 M75 25 l4 4" stroke="#d8434b" stroke-width="1.8" fill="none" stroke-linecap="round"/>';}
+  return `${eyes}${brow}${o.shy?'':'<ellipse cx="30" cy="58" rx="5" ry="2.7" fill="#f7a1a8" opacity=".5"/><ellipse cx="70" cy="58" rx="5" ry="2.7" fill="#f7a1a8" opacity=".5"/>'}${ext}${mouth}`}
+/* Nón lá khi làm ruộng */
+function nonLa(){return `<path d="M6 30 Q50 -14 94 30 Q50 38 6 30 Z" fill="#e6c98a" stroke="#9a7a44" stroke-width="1.2"/><path d="M20 26 Q50 -4 80 26 M33 20 Q50 2 67 20 M44 12 Q50 6 56 12" stroke="#c8a86a" stroke-width=".9" fill="none"/><path d="M6 30 Q50 38 94 30" stroke="#9a7a44" stroke-width="1.6" fill="none"/>`}
+function toolHand(o,skin){return o.sword?`<path d="M80 102 L100 50" stroke="${o.sword===1?'#d6dbe2':o.sword}" stroke-width="4" stroke-linecap="round"/><path d="M73 98 L87 105" stroke="#6b4a2e" stroke-width="4" stroke-linecap="round"/><circle cx="79" cy="102" r="4.4" fill="${skin}"/>`:''}
+/* Công tử áo trắng */
 function heroM(o={}){
-  const hair='#1d1b22',hl='#3a3a4a',nv='#25355c',nv2='#33487a',wt='#f3f5f9',ws='#c8d1e2',rb='#8fa3d6',skin='#fde6cf';
-  const eyes=o.sleep?`<path d="M32 49 q6 4 12 0 M56 49 q6 4 12 0" stroke="#1d2440" stroke-width="2.6" fill="none" stroke-linecap="round"/>`
-   :`<g><ellipse cx="39" cy="48" rx="5.4" ry="6.6" fill="#1d2440"/><ellipse cx="39" cy="50.5" rx="3.8" ry="3.6" fill="#4d6aa8"/><circle cx="40.8" cy="45.6" r="2" fill="#fff"/><circle cx="37.4" cy="51.6" r="1" fill="#fff"/>
-     <ellipse cx="61" cy="48" rx="5.4" ry="6.6" fill="#1d2440"/><ellipse cx="61" cy="50.5" rx="3.8" ry="3.6" fill="#4d6aa8"/><circle cx="62.8" cy="45.6" r="2" fill="#fff"/><circle cx="59.4" cy="51.6" r="1" fill="#fff"/>
-     <path d="M32.5 42.5 Q39 39.5 45.5 42.5 M54.5 42.5 Q61 39.5 67.5 42.5" stroke="#15131a" stroke-width="2.3" fill="none" stroke-linecap="round"/><path d="M45.5 42.5 l2.2 -1.6 M67.5 42.5 l2.2 -1.6" stroke="#15131a" stroke-width="1.4" stroke-linecap="round"/><path d="M35.5 55.6 Q39 56.8 42.5 55.6 M57.5 55.6 Q61 56.8 64.5 55.6" stroke="#8a6a64" stroke-width=".9" fill="none"/></g>`;
-  const brow=o.angry?'<path d="M31 35 L45 40 M69 35 L55 40" stroke="#15131a" stroke-width="3" stroke-linecap="round"/>'
-   :o.tear?'<path d="M32 39 L44 36 M68 39 L56 36" stroke="#15131a" stroke-width="2.4" stroke-linecap="round"/><path d="M36 56 q-3 7 0 10 q3 -3 0 -10z M64 56 q-3 7 0 10 q3 -3 0 -10z" fill="#7fc4ff"/>'
-   :'<path d="M33 34 Q38.5 32 44 33.5 M56 33.5 Q61.5 32 67 34" stroke="#2a2630" stroke-width="1.6" fill="none" stroke-linecap="round"/>';
-  const mouth=o.shout?'<ellipse cx="50" cy="61" rx="4.5" ry="4" fill="#8a3b2c"/>':o.tear?'<path d="M46 62 Q50 58.5 54 62" stroke="#8a3b2c" stroke-width="1.8" fill="none" stroke-linecap="round"/>'
-   :o.sleep?'<path d="M47 60 Q50 62 53 60" stroke="#8a3b2c" stroke-width="1.6" fill="none" stroke-linecap="round"/>':'<path d="M46.5 60 Q50 61.6 53.5 60" stroke="#8a3b2c" stroke-width="1.8" fill="none" stroke-linecap="round"/>';
+  const hair='#17151c',hl='#3b3a4c',nv='#1f2f5c',nv2='#2c4280',wt='#fbfcff',ws='#c9d6ea',pt='#a9c3e6',rb='#a8c8f0',skin='#fde8d6',ln='#4a4a5c';
   return `<svg viewBox="-2 -6 104 128" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <ellipse cx="50" cy="116" rx="26" ry="4" fill="rgba(0,0,0,.18)"/>
-  <path d="M24 40 Q20 70 30 76 L70 76 Q80 70 76 40 Z" fill="${hair}"/>
+  <ellipse cx="50" cy="116" rx="26" ry="4" fill="rgba(0,0,0,.16)"/>
+  ${o.hat?'':`<path d="M40 12 Q30 30 26 56 Q24 70 30 80 M42 12 Q36 34 36 62" stroke="${rb}" stroke-width="3.2" fill="none" stroke-linecap="round" opacity=".9"/>`}
+  <path d="M24 40 Q20 68 28 78 L72 78 Q80 68 76 40 Z" fill="${hair}"/>
   <ellipse cx="41" cy="112" rx="7" ry="4" fill="#1e1c24"/><ellipse cx="59" cy="112" rx="7" ry="4" fill="#1e1c24"/>
-  <path d="M33 70 Q50 63 67 70 L74 110 Q50 115 26 110 Z" fill="${nv}" stroke="rgba(0,0,0,.3)" stroke-width="1.2"/>
-  <path d="M33 70 L40 72 L36 110 L23 109 Z" fill="${wt}" stroke="${ws}" stroke-width="1.2"/>
-  <path d="M67 70 L60 72 L64 110 L77 109 Z" fill="${wt}" stroke="${ws}" stroke-width="1.2"/>
-  <path d="M38 70 L50 88 L62 70 L58 69 L50 81 L42 69 Z" fill="${wt}" stroke="${ws}" stroke-width="1"/>
-  <path d="M43 70 L50 81 L57 70" fill="${nv2}"/>
-  <rect x="38" y="86" width="24" height="5" rx="1.5" fill="${nv2}" stroke="#1b2747" stroke-width=".8"/>
-  <path d="M30 72 Q14 82 13 102 Q20 108 30 104 Q34 92 36 80 Z" fill="${wt}" stroke="${ws}" stroke-width="1.4"/>
-  <path d="M16 100 Q22 104 29 102" stroke="${nv}" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <path d="M70 72 Q86 82 87 102 Q80 108 70 104 Q66 92 64 80 Z" fill="${wt}" stroke="${ws}" stroke-width="1.4"/>
-  <path d="M84 100 Q78 104 71 102" stroke="${nv}" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <circle cx="21" cy="101" r="4.6" fill="${skin}"/><circle cx="79" cy="101" r="4.6" fill="${skin}"/>
-  ${o.sword?'':`<g transform="rotate(-28 56 80)"><rect x="52" y="72" width="7" height="17" rx="1.5" fill="#2a2630"/><path d="M53 74 h5 M53 78 h5 M53 82 h5" stroke="#55505e" stroke-width=".8"/></g><circle cx="57" cy="85" r="3.6" fill="${skin}"/>`}
-  <circle cx="50" cy="42" r="30" fill="${skin}" stroke="#5a4636" stroke-width=".8"/>
-  <ellipse cx="48" cy="7" rx="10" ry="9" fill="${hair}"/><path d="M41 3 Q48 -2 55 3" stroke="${hl}" stroke-width="1.6" fill="none"/>
-  <path d="M39 10 L30 4 L31 12 Z M39 10 L31 16 L36 17 Z" fill="${rb}" stroke="#6d84bd" stroke-width=".8"/><rect x="37" y="7.5" width="4" height="5" rx="1" fill="${rb}"/><path d="M38 12 Q33 22 30 30 M39 12 Q37 20 36 28" stroke="${rb}" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-  <path d="M19 46 Q16 14 46 11 Q78 10 82 40 Q81 50 79 58 Q76 40 70 30 Q62 22 54 24 Q40 28 33 38 Q28 46 26 60 Q20 56 19 46 Z" fill="${hair}" stroke="#0e0d12" stroke-width=".8"/>
+  <path d="M33 70 Q50 63 67 70 L74 110 Q50 115 26 110 Z" fill="${nv}" stroke="${ln}" stroke-width=".9"/>
+  <path d="M42 96 q4 6 8 2 q4 6 8 0 M38 106 q6 4 12 0 q6 4 12 0" stroke="${nv2}" stroke-width="1" fill="none"/>
+  <path d="M33 70 Q26 84 22 111 L36 111 Q36 90 40 72 Z" fill="${wt}" stroke="${ws}" stroke-width="1.1"/>
+  <path d="M67 70 Q74 84 78 111 L64 111 Q64 90 60 72 Z" fill="${wt}" stroke="${ws}" stroke-width="1.1"/>
+  <path d="M26 100 q4 -4 8 0 q-4 4 -8 0 M29 90 q3 -3 6 0 M66 98 q4 -4 8 0 q-4 4 -8 0 M68 88 q3 -3 6 0" stroke="${pt}" stroke-width=".9" fill="none"/>
+  <path d="M39 70 L50 86 L61 70 L57 69 L50 80 L43 69 Z" fill="${wt}" stroke="${ws}" stroke-width=".9"/><path d="M44 70 L50 80 L56 70" fill="${nv2}"/>
+  <rect x="37" y="86" width="26" height="4.6" rx="1.4" fill="${wt}" stroke="${ws}" stroke-width=".8"/>
+  <path d="M55 90.6 v6" stroke="#6aa88a" stroke-width="1"/><circle cx="55" cy="98.4" r="2.4" fill="#7cc4a0" stroke="#3f7a5e" stroke-width=".7"/><path d="M55 100.8 v8 M54 101 l-1 7 M56 101 l1 7" stroke="#f4f6fb" stroke-width="1.1"/>
+  <path d="M31 72 Q14 82 13 103 Q20 109 31 105 Q34 92 37 80 Z" fill="${wt}" stroke="${ws}" stroke-width="1.2"/>
+  <path d="M69 72 Q86 82 87 103 Q80 109 69 105 Q66 92 63 80 Z" fill="${wt}" stroke="${ws}" stroke-width="1.2"/>
+  <path d="M17 96 q5 -4 9 0 q-4 4 -9 0 M80 94 q-5 -4 -9 0 q4 4 9 0" stroke="${pt}" stroke-width=".9" fill="none"/>
+  <path d="M16 101 Q22 105 29 103" stroke="${nv}" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M84 101 Q78 105 71 103" stroke="${nv}" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="21" cy="102" r="4.4" fill="${skin}" stroke="${ln}" stroke-width=".5"/><circle cx="79" cy="102" r="4.4" fill="${skin}" stroke="${ln}" stroke-width=".5"/>
+  ${o.sword||o.hat||o.work?'':`<g transform="rotate(-28 56 80)"><rect x="52" y="72" width="7" height="17" rx="1.5" fill="#2a2630"/><path d="M53 74 h5 M53 78 h5 M53 82 h5" stroke="#55505e" stroke-width=".8"/></g><circle cx="57" cy="85" r="3.6" fill="${skin}"/>`}
+  <circle cx="50" cy="42" r="30" fill="${skin}" stroke="${ln}" stroke-width=".7"/>
+  ${o.hat?'':`<ellipse cx="49" cy="7" rx="10" ry="9" fill="${hair}" stroke="#0c0b10" stroke-width=".7"/><path d="M42 3 Q49 -2 56 3" stroke="${hl}" stroke-width="1.5" fill="none"/>
+  <path d="M40 11 L29 4 L30 14 Z M40 11 L31 18 L37 19 Z" fill="${rb}" stroke="#7f9fcc" stroke-width=".8"/><rect x="38" y="8.5" width="4.4" height="5" rx="1.2" fill="${rb}"/>`}
+  <path d="M19 46 Q16 14 46 11 Q78 10 82 40 Q81 50 79 58 Q76 40 70 30 Q62 22 54 24 Q40 28 33 38 Q28 46 26 60 Q20 56 19 46 Z" fill="${hair}" stroke="#0c0b10" stroke-width=".7"/>
   <path d="M54 24 Q46 34 44 44 Q40 34 33 38" fill="${hair}"/>
-  <path d="M27 50 Q24 64 30 72 Q27 60 30 50 Z" fill="${hair}"/>
-  <path d="M75 40 Q80 56 76 70 Q74 58 72 46 Z" fill="${hair}"/>
-  <path d="M28 26 Q44 14 68 20" stroke="${hl}" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".8"/>
+  <path d="M27 50 Q23 66 29 76 Q27 62 30 50 Z" fill="${hair}"/><path d="M75 40 Q81 58 76 74 Q74 58 72 46 Z" fill="${hair}"/>
+  <path d="M28 26 Q44 14 68 20 M60 24 Q70 30 75 44" stroke="${hl}" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".85"/>
+  ${o.hat?nonLa():''}
   ${o.crown?'<path d="M38 2 L41 -6 L46 -1 L50 -8 L54 -1 L59 -6 L62 2 Z" fill="#f0cf7a" stroke="#b07d1a" stroke-width="1.2"/>':''}
-  ${eyes}${brow}
-  <path d="M29 56 l3 -2 M32 57 l3 -2 M65 55 l3 2 M68 54 l3 2" stroke="#e98c8c" stroke-width="1.3" stroke-linecap="round"/>
-  <ellipse cx="31" cy="57" rx="5" ry="2.6" fill="#f6a3a3" opacity=".4"/><ellipse cx="69" cy="57" rx="5" ry="2.6" fill="#f6a3a3" opacity=".4"/>
-  ${mouth}
-  ${o.wow?'<path d="M24 26 l-7 -6 M76 26 l7 -6 M50 -10 v-6" stroke="#f0cf7a" stroke-width="2.4" stroke-linecap="round"/>':''}
-  ${o.sword?`<path d="M80 100 L100 48" stroke="${o.sword===1?'#d6dbe2':o.sword}" stroke-width="4.5" stroke-linecap="round"/><path d="M73 96 L87 103" stroke="#6b4a2e" stroke-width="4.5" stroke-linecap="round"/><circle cx="79" cy="101" r="4.6" fill="${skin}"/>`:''}
-  </svg>`}
-/* Tiểu thư: tóc dài buông, búi cài trâm phượng tua rua, áo trong ngọc bích thêu hoa, áo khoác vàng tay rộng, dải lụa hồng */
-function heroF(pal={},o={}){
-  const hair=pal.hair||'#3a3340',hl='#6a6178',out=pal.robe&&pal.robe!=='#4a8fdc'?pal.robe:'#f1c46e',inn=pal.robe&&pal.robe!=='#4a8fdc'?'#fbf3e4':'#8fd6cb',sash=pal.trim&&pal.trim!=='#d9a73a'?pal.trim:'#f29db5',skin='#fde8d6',ln='#5a4636';
-  const eye=(x,f)=>`<g><path d="M${x-6.5} ${45} Q${x} ${39.5} ${x+6.5} ${45} L${x+6} ${53} Q${x} ${57} ${x-6} ${53} Z" fill="#3d3a4a"/><ellipse cx="${x}" cy="51" rx="4.6" ry="4" fill="#7b7f9e"/><ellipse cx="${x}" cy="52.6" rx="3" ry="2" fill="#aab3cf" opacity=".8"/>
-    <circle cx="${x+1.8}" cy="46.4" r="2.3" fill="#fff"/><circle cx="${x-2.4}" cy="53" r="1.1" fill="#fff"/>
-    <path d="M${x-7.5} ${45.5} Q${x} ${38} ${x+7.5} ${44.5}" stroke="#211b22" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M${x+(f?-7.5:7.5)} ${f?45.5:44.5} l${f?-2.6:2.6} -2.2" stroke="#211b22" stroke-width="1.6" stroke-linecap="round"/>
-    <path d="M${x-4} 56.4 Q${x} 57.8 ${x+4} 56.4" stroke="#8a6a64" stroke-width=".9" fill="none"/></g>`;
-  const eyes=o.sleep?`<path d="M32 50 q6 4.5 12 0 M56 50 q6 4.5 12 0" stroke="#211b22" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M31 51 l-2 2 M69 51 l2 2" stroke="#211b22" stroke-width="1.4"/>`:eye(38,1)+eye(62,0);
-  const brow=o.angry?'<path d="M31 37 L44 41 M69 37 L56 41" stroke="#3a3340" stroke-width="2.4" stroke-linecap="round"/>':o.tear?'<path d="M32 40 L44 37 M68 40 L56 37" stroke="#3a3340" stroke-width="2" stroke-linecap="round"/><path d="M35 57 q-3 7 0 10 q3 -3 0 -10z M65 57 q-3 7 0 10 q3 -3 0 -10z" fill="#9fd4ff"/>':'<path d="M33 34.5 Q38 32.5 43 33.5 M57 33.5 Q62 32.5 67 34.5" stroke="#6a5a62" stroke-width="1.3" fill="none" stroke-linecap="round"/>';
-  const mouth=o.shout?'<ellipse cx="50" cy="62" rx="3.6" ry="4.2" fill="#c0545a"/><ellipse cx="50" cy="63.6" rx="2.2" ry="1.6" fill="#f2949a"/>':o.tear?'<path d="M47 63 Q50 60.5 53 63" stroke="#b04a50" stroke-width="1.6" fill="none" stroke-linecap="round"/>':'<path d="M47.2 61 Q50 63.6 52.8 61" stroke="#b04a50" stroke-width="1.6" fill="none" stroke-linecap="round"/>';
-  const dot=(x,y)=>`<g transform="translate(${x} ${y})"><path d="M0 -3 L.9 -.9 L3 0 L.9 .9 L0 3 L-.9 .9 L-3 0 L-.9 -.9Z" fill="#9b8fd6"/><circle r=".9" fill="#f6e3a0"/></g>`;
-  return `<svg viewBox="-2 -6 104 128" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <ellipse cx="50" cy="116" rx="28" ry="4" fill="rgba(0,0,0,.16)"/>
-  <path d="M22 36 Q10 64 12 90 Q10 104 4 114 Q22 110 30 98 L70 98 Q78 110 96 114 Q90 104 88 90 Q90 64 78 36 Z" fill="${hair}" stroke="#241f29" stroke-width=".8"/>
-  <path d="M16 70 Q14 92 8 108 M84 70 Q86 92 92 108 M22 60 Q20 84 18 100" stroke="${hl}" stroke-width="1" fill="none" opacity=".7"/>
-  <path d="M33 68 Q50 62 67 68 L74 110 Q50 116 26 110 Z" fill="${inn}" stroke="${ln}" stroke-width=".9"/>
-  ${dot(38,90)}${dot(56,96)}${dot(64,84)}${dot(44,104)}${dot(62,106)}
-  <path d="M33 68 Q24 80 20 112 L34 112 Q34 90 39 70 Z" fill="${out}" stroke="${ln}" stroke-width=".9"/>
-  <path d="M67 68 Q76 80 80 112 L66 112 Q66 90 61 70 Z" fill="${out}" stroke="${ln}" stroke-width=".9"/>
-  <path d="M40 68 L50 80 L60 68" fill="none" stroke="${out}" stroke-width="3.2"/><path d="M40 68 L50 80 L60 68" fill="none" stroke="${ln}" stroke-width=".7"/>
-  <path d="M35 84 Q50 88 65 84 L65 90 Q50 94 35 90 Z" fill="${sash}" stroke="${ln}" stroke-width=".7"/>
-  <path d="M48 90 Q44 104 40 116 M52 90 Q58 102 66 114" stroke="${sash}" stroke-width="2.4" fill="none" stroke-linecap="round"/>
-  <path d="M32 70 Q14 78 12 104 Q20 112 32 106 Q34 92 37 78 Z" fill="${out}" stroke="${ln}" stroke-width=".9"/>
-  <path d="M68 70 Q86 78 88 104 Q80 112 68 106 Q66 92 63 78 Z" fill="${out}" stroke="${ln}" stroke-width=".9"/>
-  <path d="M18 92 q6 -4 10 2 q-4 6 -10 2z M24 86 q4 -2 5 2" fill="none" stroke="#e7a7a0" stroke-width=".9" opacity=".8"/>
-  <path d="M14 104 Q22 108 31 105" stroke="${inn}" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M86 104 Q78 108 69 105" stroke="${inn}" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-  <circle cx="22" cy="104" r="4.3" fill="${skin}" stroke="${ln}" stroke-width=".6"/><circle cx="78" cy="104" r="4.3" fill="${skin}" stroke="${ln}" stroke-width=".6"/>
-  <circle cx="50" cy="42" r="30" fill="${skin}" stroke="${ln}" stroke-width=".8"/>
-  <ellipse cx="62" cy="9" rx="13" ry="10" fill="${hair}" stroke="#241f29" stroke-width=".8"/><path d="M53 6 Q62 0 72 6" stroke="${hl}" stroke-width="1.2" fill="none"/>
-  <path d="M19 46 Q16 12 50 11 Q84 12 81 46 Q78 34 70 28 Q66 38 58 40 Q62 32 60 24 Q52 34 40 36 Q46 30 46 22 Q36 30 26 34 Q22 40 19 46 Z" fill="${hair}" stroke="#241f29" stroke-width=".8"/>
-  <path d="M22 44 Q18 60 24 76 Q26 62 27 50 Z M78 44 Q82 60 76 76 Q74 62 73 50 Z" fill="${hair}" stroke="#241f29" stroke-width=".7"/>
-  <path d="M28 22 Q46 12 70 18" stroke="${hl}" stroke-width="1.3" fill="none" stroke-linecap="round" opacity=".8"/>
-  <g transform="translate(68 8)"><path d="M-4 0 Q2 -14 14 -10 Q8 -6 10 2 Q4 -2 -4 0Z" fill="#5fb6c9" stroke="#2f6f86" stroke-width=".8"/><path d="M-2 2 Q8 -4 16 4 Q8 4 4 10 Q2 4 -2 2Z" fill="#7fcadb" stroke="#2f6f86" stroke-width=".8"/>
-    <circle cx="2" cy="-1" r="2.6" fill="#e2b544" stroke="#9a7420" stroke-width=".6"/><circle cx="8" cy="-8" r="1.2" fill="#e04b5a"/><circle cx="12" cy="1" r="1.2" fill="#e04b5a"/>
-    <path d="M6 8 v18 M10 7 v15 M14 5 v12" stroke="#c9a24f" stroke-width=".9"/><circle cx="6" cy="27" r="1.4" fill="#e04b5a"/><circle cx="10" cy="23" r="1.3" fill="#5fb6c9"/><circle cx="14" cy="18" r="1.2" fill="#e2b544"/></g>
-  <path d="M44 6 Q48 0 54 2" stroke="#5fb6c9" stroke-width="2" fill="none" stroke-linecap="round"/>
-  ${o.crown?'<path d="M36 10 L39 1 L44 6 L48 -2 L52 6 L56 1 L60 10 Z" fill="#f0cf7a" stroke="#b07d1a" stroke-width="1"/>':''}
-  ${eyes}${brow}
-  <ellipse cx="30" cy="58" rx="5" ry="2.8" fill="#f7a1a8" opacity=".5"/><ellipse cx="70" cy="58" rx="5" ry="2.8" fill="#f7a1a8" opacity=".5"/>
-  ${mouth}
+  ${chFace(o,{d:'#1b2350',i:'#3f5ea8',h:'#8fb0e6',b:'#2a2630'})}
   ${o.wow?'<path d="M22 26 l-7 -6 M78 26 l7 -6" stroke="#f0cf7a" stroke-width="2.4" stroke-linecap="round"/>':''}
-  ${o.sword?`<path d="M80 102 L100 50" stroke="${o.sword===1?'#d6dbe2':o.sword}" stroke-width="4" stroke-linecap="round"/><path d="M73 98 L87 105" stroke="#6b4a2e" stroke-width="4" stroke-linecap="round"/><circle cx="78" cy="104" r="4.3" fill="${skin}"/>`:''}
+  ${toolHand(o,skin)}
+  </svg>`}
+/* Tiểu thư: tóc nâu dài, trâm phượng tua rua, áo vàng nhạt thêu hoa hồng, váy trong xanh ngọc */
+function heroF(pal={},o={}){
+  const own=pal.robe&&pal.robe!=='#4a8fdc',hair=pal.hair||'#5a3b2c',hl='#8a6250',out=own?pal.robe:'#f6d98c',inn=own?'#fbf3e4':'#a6e0db',sash=pal.trim&&pal.trim!=='#d9a73a'?pal.trim:'#8fc3ea',rib='#f6a8bf',skin='#fde8d6',ln='#7a5a44';
+  const fl=(x,y,s=1)=>`<g transform="translate(${x} ${y}) scale(${s})"><circle cx="0" cy="-2" r="1.6" fill="#f7c4cf"/><circle cx="1.9" cy="-.6" r="1.6" fill="#f7c4cf"/><circle cx="1.2" cy="1.6" r="1.6" fill="#f7c4cf"/><circle cx="-1.2" cy="1.6" r="1.6" fill="#f7c4cf"/><circle cx="-1.9" cy="-.6" r="1.6" fill="#f7c4cf"/><circle r=".9" fill="#f2c95a"/></g>`;
+  const st=(x,y)=>`<g transform="translate(${x} ${y})"><path d="M0 -2.6 L.8 -.8 L2.6 0 L.8 .8 L0 2.6 L-.8 .8 L-2.6 0 L-.8 -.8Z" fill="#9b8fd6"/><circle r=".8" fill="#fff3c0"/></g>`;
+  return `<svg viewBox="-2 -6 104 128" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <ellipse cx="50" cy="116" rx="28" ry="4" fill="rgba(0,0,0,.15)"/>
+  <path d="M22 36 Q8 64 12 90 Q10 104 3 114 Q22 110 30 98 L70 98 Q78 110 97 114 Q90 104 88 90 Q92 64 78 36 Z" fill="${hair}" stroke="#3a2418" stroke-width=".7"/>
+  <path d="M15 66 Q12 92 7 108 M85 66 Q88 92 93 108 M21 58 Q18 84 17 100 M79 58 Q82 84 83 100" stroke="${hl}" stroke-width=".9" fill="none" opacity=".8"/>
+  <path d="M33 68 Q50 62 67 68 L74 111 Q50 116 26 111 Z" fill="${inn}" stroke="${ln}" stroke-width=".8"/>
+  ${st(39,94)}${st(57,98)}${st(63,86)}${st(45,106)}${st(62,107)}
+  <path d="M33 68 Q24 80 19 113 L34 113 Q34 90 39 70 Z" fill="${out}" stroke="${ln}" stroke-width=".8"/>
+  <path d="M67 68 Q76 80 81 113 L66 113 Q66 90 61 70 Z" fill="${out}" stroke="${ln}" stroke-width=".8"/>
+  ${fl(26,100,1.1)}${fl(73,96)}${fl(29,108,.8)}
+  <path d="M40 68 L50 80 L60 68" fill="none" stroke="${out}" stroke-width="3.2"/><path d="M40 68 L50 80 L60 68" fill="none" stroke="${ln}" stroke-width=".6"/>
+  <path d="M35 83 Q50 87 65 83 L65 90 Q50 94 35 90 Z" fill="${sash}" stroke="${ln}" stroke-width=".6"/>
+  <path d="M48 90 Q43 104 38 117 M52 90 Q59 103 68 115" stroke="${rib}" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <path d="M32 70 Q13 78 11 105 Q19 113 32 107 Q34 92 37 78 Z" fill="${out}" stroke="${ln}" stroke-width=".8"/>
+  <path d="M68 70 Q87 78 89 105 Q81 113 68 107 Q66 92 63 78 Z" fill="${out}" stroke="${ln}" stroke-width=".8"/>
+  ${fl(19,92,1.3)}${fl(81,90,1.3)}${fl(24,84,.8)}
+  <path d="M13 104 Q22 108 31 106" stroke="${inn}" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M87 104 Q78 108 69 106" stroke="${inn}" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+  <path d="M12 106 Q4 112 6 118 M88 106 Q96 112 94 118" stroke="${rib}" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".9"/>
+  <circle cx="22" cy="104" r="4.3" fill="${skin}" stroke="${ln}" stroke-width=".5"/><circle cx="78" cy="104" r="4.3" fill="${skin}" stroke="${ln}" stroke-width=".5"/>
+  <circle cx="50" cy="42" r="30" fill="${skin}" stroke="${ln}" stroke-width=".7"/>
+  ${o.hat?'':`<ellipse cx="58" cy="9" rx="14" ry="10" fill="${hair}" stroke="#3a2418" stroke-width=".7"/><ellipse cx="46" cy="10" rx="9" ry="7" fill="${hair}" stroke="#3a2418" stroke-width=".7"/><path d="M49 5 Q58 -1 69 5" stroke="${hl}" stroke-width="1.3" fill="none"/>`}
+  <path d="M19 46 Q16 12 50 11 Q84 12 81 46 Q78 34 70 28 Q66 38 58 40 Q62 32 60 24 Q52 34 40 36 Q46 30 46 22 Q36 30 26 34 Q22 40 19 46 Z" fill="${hair}" stroke="#3a2418" stroke-width=".7"/>
+  <path d="M22 44 Q17 62 24 78 Q26 62 27 50 Z M78 44 Q83 62 76 78 Q74 62 73 50 Z" fill="${hair}" stroke="#3a2418" stroke-width=".6"/>
+  <path d="M28 22 Q46 12 70 18" stroke="${hl}" stroke-width="1.3" fill="none" stroke-linecap="round" opacity=".85"/>
+  ${o.hat?nonLa():`<g transform="translate(66 7)"><path d="M-6 2 Q0 -14 14 -11 Q8 -6 11 2 Q4 -2 -6 2Z" fill="#5fb6c9" stroke="#2f6f86" stroke-width=".7"/><path d="M-3 4 Q8 -3 17 5 Q8 5 4 11 Q2 5 -3 4Z" fill="#86d0de" stroke="#2f6f86" stroke-width=".7"/>
+    <path d="M-8 -2 Q-4 -10 2 -9" stroke="#e2b544" stroke-width="1.6" fill="none"/><circle cx="2" cy="-1" r="2.6" fill="#e2b544" stroke="#9a7420" stroke-width=".6"/><circle cx="8" cy="-8" r="1.2" fill="#e04b5a"/><circle cx="12" cy="1" r="1.2" fill="#e04b5a"/><circle cx="-6" cy="1" r="1.3" fill="#e04b5a"/>
+    <path d="M5 9 v20 M9 8 v16 M13 6 v13" stroke="#c9a24f" stroke-width=".9"/><circle cx="5" cy="30" r="1.4" fill="#e04b5a"/><circle cx="9" cy="25" r="1.3" fill="#5fb6c9"/><circle cx="13" cy="20" r="1.2" fill="#e2b544"/></g>
+  <path d="M38 8 Q32 18 30 30" stroke="#9fd0ea" stroke-width="2" fill="none" stroke-linecap="round"/>`}
+  ${o.crown?'<path d="M36 10 L39 1 L44 6 L48 -2 L52 6 L56 1 L60 10 Z" fill="#f0cf7a" stroke="#b07d1a" stroke-width="1"/>':''}
+  ${chFace(o,{d:'#3d2a24',i:'#7a5240',h:'#c99a7c',b:'#6a4a3a'})}
+  ${o.wow?'<path d="M22 26 l-7 -6 M78 26 l7 -6" stroke="#f0cf7a" stroke-width="2.4" stroke-linecap="round"/>':''}
+  ${toolHand(o,skin)}
   </svg>`}
 function chibi(g,pal={},o={}){
   if(g==='f'&&!o.helmet)return heroF(pal,o);
@@ -1258,9 +1265,39 @@ const PROPS={
   battle:`${SWORD}<path d="M178 128 V54" stroke="#3a2a1c" stroke-width="4"/><path class="flag" d="M180 54 l18 6 l-18 6 z" fill="#2a211b"/>
     <circle class="p-pop" cx="150" cy="122" r="9" fill="#cdbf9d" opacity=".8"/><circle class="p-pop d2" cx="170" cy="122" r="11" fill="#cdbf9d" opacity=".8"/><circle class="p-pop d3" cx="130" cy="124" r="8" fill="#cdbf9d" opacity=".8"/>
     <g class="p-spark"><path d="M150 76 l-6 -8 M154 74 l2 -10 M158 76 l8 -6" stroke="#ffb02e" stroke-width="2.5" stroke-linecap="round"/></g>`,
+  water:`<rect x="96" y="120" width="100" height="16" rx="4" fill="#8a6a3e"/>
+    <path d="M130 120 q-3 -9 -8 -11 M130 120 q3 -9 8 -11 M160 120 q-3 -10 -8 -12 M160 120 q3 -10 8 -12 M186 120 q-2 -7 -6 -9 M186 120 q2 -7 6 -9" stroke="#4f8a4a" stroke-width="2.5" fill="none"/>
+    <g class="p-tilt" style="transform-origin:86px 108px"><path d="M84 104 h26 q4 0 4 4 v12 q0 4 -4 4 h-22 q-4 0 -4 -4z" fill="#9a8a5a" stroke="#5e5130" stroke-width="1.5"/><path d="M84 108 q-8 -2 -8 8 q0 6 8 6" stroke="#5e5130" stroke-width="2.5" fill="none"/><path d="M114 108 L132 96 l3 4 l-17 14z" fill="#9a8a5a" stroke="#5e5130" stroke-width="1.2"/></g>
+    <path class="p-stream" d="M134 98 Q146 104 150 120" stroke="#7fc4ff" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="4 4"/><path class="p-stream d2" d="M136 100 Q152 106 158 120" stroke="#a9dcff" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="3 5"/>`,
+  herb:`<path d="M150 128 q-6 -20 4 -30 q6 14 -4 30z M160 128 q-12 -10 -8 -24 q12 8 8 24z M174 128 q-4 -18 6 -26 q4 14 -6 26z M186 128 q-10 -10 -6 -22 q10 6 6 22z" fill="#5f9b55"/><circle cx="156" cy="100" r="3" fill="#e57c86"/><circle cx="182" cy="104" r="2.6" fill="#f2c95a"/>
+    <path d="M100 112 h34 l-4 20 h-26z" fill="#c99a5a" stroke="#7a5230" stroke-width="1.5"/><path d="M102 118 h30 M103 124 h28" stroke="#9a7240" stroke-width="1.2"/><path d="M104 112 q13 -16 26 0" stroke="#7a5230" stroke-width="2" fill="none"/>
+    <g class="p-lift"><path d="M110 110 q-4 -8 2 -12 q4 8 -2 12z M118 110 q4 -10 10 -8 q-2 8 -10 8z" fill="#6fae62"/></g>`,
+  wash:`<ellipse cx="146" cy="118" rx="36" ry="12" fill="#8a6a3e" stroke="#5a3826" stroke-width="2"/><ellipse cx="146" cy="114" rx="31" ry="8" fill="#7fc4e8"/>
+    <path d="M128 112 q-3 -8 3 -10 q2 8 -3 10z M150 110 q4 -8 10 -6 q-2 8 -10 6z M166 113 q-2 -7 4 -9 q2 7 -4 9z" fill="#5f9b55"/>
+    <circle class="p-pop" cx="136" cy="110" r="2.4" fill="#fff"/><circle class="p-pop d2" cx="158" cy="108" r="2" fill="#fff"/><circle class="p-pop d3" cx="148" cy="112" r="1.8" fill="#fff"/>
+    <g class="p-sw" style="transform-origin:86px 112px"><path d="M86 112 L118 112" stroke="#fde8d6" stroke-width="6" stroke-linecap="round"/></g>`,
+  brew:`<path d="M126 132 l8 -14 M178 132 l-8 -14" stroke="#3a2a1c" stroke-width="4" stroke-linecap="round"/>
+    <path class="p-fire" d="M140 132 q-6 -10 2 -16 q0 8 6 4 q-2 -8 4 -12 q6 10 2 18 q6 -2 4 -8 q8 8 0 14z" fill="#ff8a2c"/><path class="p-fire d2" d="M146 132 q-2 -6 2 -10 q4 6 2 10z" fill="#ffd34d"/>
+    <path d="M124 92 h56 q0 26 -28 26 q-28 0 -28 -26z" fill="#2c2a2e" stroke="#111" stroke-width="1.5"/><ellipse cx="152" cy="92" rx="28" ry="6" fill="#5a4a3a"/><ellipse cx="152" cy="92" rx="22" ry="4" fill="#8a6a3e"/>
+    <path class="p-steam" d="M142 84 q5 -7 0 -14 q-5 -7 0 -14" stroke="#fff" stroke-width="3" fill="none" opacity=".8"/><path class="p-steam d2" d="M160 84 q5 -7 0 -14 q-5 -7 0 -14" stroke="#fff" stroke-width="3" fill="none" opacity=".8"/>
+    <g class="p-sw" style="transform-origin:86px 112px"><path d="M86 112 L150 86" stroke="#8a5a2b" stroke-width="4" stroke-linecap="round"/></g>`,
+  heat:`<path d="M120 132 v-40 q0 -8 8 -8 h44 q8 0 8 8 v40z" fill="#6a5a50" stroke="#3a2e28" stroke-width="2"/><path d="M134 132 v-22 q0 -10 16 -10 q16 0 16 10 v22z" fill="#2a1a14"/>
+    <path class="p-fire" d="M138 132 q-4 -12 4 -18 q0 8 6 4 q-2 -10 6 -14 q8 12 2 20 q6 -2 6 -10 q8 10 0 18z" fill="#ff7a1c"/><path class="p-fire d2" d="M146 132 q-2 -8 4 -12 q6 8 0 12z" fill="#ffd34d"/>
+    <path d="M86 112 L150 112" stroke="#4a4e55" stroke-width="4" stroke-linecap="round"/><rect x="144" y="108" width="16" height="7" rx="2" fill="#ff9a3c" class="p-spark"/>
+    <path d="M128 84 v-20 h10 v20" fill="#5a4a40" stroke="#3a2e28"/><path class="p-steam" d="M133 62 q5 -7 0 -14" stroke="#9a9aa0" stroke-width="4" fill="none" opacity=".7"/>`,
+  quench:`<path d="M124 102 h52 l-4 30 h-44z" fill="#7a5a3a" stroke="#4a3220" stroke-width="2"/><path d="M124 102 h52" stroke="#4a3220" stroke-width="3"/><ellipse cx="150" cy="104" rx="24" ry="4" fill="#5fb2e0"/>
+    <g class="p-pound"><path d="M86 112 L150 100" stroke="#4a4e55" stroke-width="4" stroke-linecap="round"/><path d="M140 102 L162 98" stroke="#ff9a3c" stroke-width="5" stroke-linecap="round"/></g>
+    <path class="p-steam" d="M140 96 q6 -8 0 -16 q-6 -8 0 -16" stroke="#fff" stroke-width="4" fill="none"/><path class="p-steam d2" d="M158 96 q6 -8 0 -16 q-6 -8 0 -16" stroke="#fff" stroke-width="4" fill="none"/>
+    <circle class="p-pop" cx="146" cy="100" r="2.5" fill="#bfe6ff"/><circle class="p-pop d2" cx="156" cy="100" r="2" fill="#bfe6ff"/>`,
+  done:`<g class="p-lift"><path d="M88 108 L150 40" stroke="#dfe8f2" stroke-width="7" stroke-linecap="round"/><path d="M88 108 L150 40" stroke="#9fb8d0" stroke-width="2"/><path d="M80 102 L98 116" stroke="#c9a24f" stroke-width="5" stroke-linecap="round"/><circle cx="89" cy="109" r="3" fill="#5fb6c9"/></g>
+    <g class="p-spark"><path d="M152 30 v-10 M152 30 v10 M152 30 h-10 M152 30 h10" stroke="#fff6b0" stroke-width="2.4" stroke-linecap="round"/></g><g class="p-spark d2"><path d="M126 52 l-5 -5 M126 52 l5 5 M126 52 l-5 5 M126 52 l5 -5" stroke="#bfe6ff" stroke-width="2" stroke-linecap="round"/></g>`,
 };
+/* Công đoạn: mỗi việc chia nhiều cảnh nối nhau theo tiến độ */
+const STAGES={farm:['farm','plant','water'],plant:['plant','water'],medic:['herb','wash','medic','brew'],forge:['heat','forge','quench','done']};
+const SCENE_FACE={farm:{hat:1},plant:{hat:1},water:{hat:1},harvest:{hat:1},eat:{happy:1},music:{happy:1},marry:{shy:1},battle:{angry:1},done:{happy:1},study:{},write:{}};
+function stageOf(k){const st=STAGES[k];if(!st||!BUSY||BUSY.k!==k)return k;return st[Math.min(st.length-1,Math.floor((BUSY.el/(BUSY.dur||1))*st.length))]}
 function scene(k,o={}){
-  const ch=place(chibi(S?S.gender:'m',{},{sleep:o.sleep}),8,10,100,123);
+  const ch=place(chibi(S?S.gender:'m',{},{...(SCENE_FACE[k]||{}),work:!!PROPS[k],sleep:o.sleep}),8,10,100,123);
   let extra='';
   if(o.sleep)extra=`<text class="p-zz" x="96" y="40" font-size="18" fill="#2b64b0" font-family="serif">Z</text><text class="p-zz d2" x="108" y="30" font-size="14" fill="#2b64b0" font-family="serif" style="animation-delay:1.3s">z</text>`;
   return `<ellipse cx="60" cy="134" rx="40" ry="5" fill="rgba(0,0,0,.12)"/>${ch}${PROPS[k]||''}${extra}`;
@@ -2045,7 +2082,7 @@ function homePanel(){
     {const b=S.base,st2=stats();h+=`<div class="srows">${statRows(st2)}</div>`;if(0)h+=`<div class="wk"><span>Bạn:</span><span>🥋 Võ ${st2.vo} <small>(+${st2.vo-b.vo})</small></span><span>📜 Trí ${st2.tri} <small>(+${st2.tri-b.tri})</small></span><span>🌸 Mị ${st2.mi} <small>(+${st2.mi-b.mi})</small></span><span>⚡ ${st2.max}</span></div>`}
     if(!S.partners.length)h+=`<p class="desc">${S.home.hauvien?'Chưa có ai. Ghé Hồng Nương Quán để mai mối.':'Xây Hậu viện để có thể cưới hỏi.'}</p>`;
     S.partners.forEach((p,i)=>{const c=cand(p.id);
-      h+=`<div class="pers"><div class="pic">${chibi(S.gender==='m'?'f':'m',c.pal,{crown:c.crown})}</div><div class="info"><b>${c.n}</b> <span class="chip ${p.joy>=40?'g':'r'}">💗 ${p.joy}</span><br><small>${i===0?(S.gender==='m'?'Chính thất':'Phu quân'):(S.gender==='m'?'Thiếp':'Lang quân')} · ${c.t}</small><div class="wk">${bonIc(c.bonus,p.joy>=40?1:.5)}${p.joy>=40?perkIc(c.perk):''}${p.joy<40?'<span class="r">💔 ½ chỉ số, mất tài riêng</span>':''}${mgrOf(p.id)?`<span class="g">💞 quản ${MGRZ[mgrOf(p.id)].ic} ${HOME_ZONES[mgrOf(p.id)].n}</span><span class="r">💔 −${MGR_TIRE}/đêm</span>`:`<span class="g">🛏️ nghỉ +${hvRest()}/đêm</span>`}<span>🍽️ 3🌾 ${Math.round(c.up*1.5)}<i class="ag"></i></span></div></div></div>`;
+      h+=`<div class="pers"><div class="pic">${chibi(S.gender==='m'?'f':'m',c.pal,{crown:c.crown,happy:p.joy>=70,tear:p.joy<25})}</div><div class="info"><b>${c.n}</b> <span class="chip ${p.joy>=40?'g':'r'}">💗 ${p.joy}</span><br><small>${i===0?(S.gender==='m'?'Chính thất':'Phu quân'):(S.gender==='m'?'Thiếp':'Lang quân')} · ${c.t}</small><div class="wk">${bonIc(c.bonus,p.joy>=40?1:.5)}${p.joy>=40?perkIc(c.perk):''}${p.joy<40?'<span class="r">💔 ½ chỉ số, mất tài riêng</span>':''}${mgrOf(p.id)?`<span class="g">💞 quản ${MGRZ[mgrOf(p.id)].ic} ${HOME_ZONES[mgrOf(p.id)].n}</span><span class="r">💔 −${MGR_TIRE}/đêm</span>`:`<span class="g">🛏️ nghỉ +${hvRest()}/đêm</span>`}<span>🍽️ 3🌾 ${Math.round(c.up*1.5)}<i class="ag"></i></span></div></div></div>`;
       h=h.replace(/<\/div><\/div><\/div>$/,`</div>${mgrOf(p.id)?B('🏡 Nghỉ','',()=>setMgr(mgrOf(p.id),null),{cls:'mini'}):''}</div></div>`);
     });
     if(S.home.hauvien)h+=B('Đến Hồng Nương Quán','Mai mối, cưới hỏi',()=>goTo('hongnuong'));
@@ -2168,7 +2205,7 @@ function setHero(id,pos,kind,walking,mw){
   const tf=`translate(${pos.x-30}px, ${pos.y-70}px)`;
   if(g.dataset.tf!==tf){g.dataset.tf=tf;g.style.transform=tf}
   g.classList.toggle('walking',!!walking);
-  const work=kind!=='idle'&&!walking;
+  const work=kind!=='idle'&&!walking;kind=stageOf(kind);
   if(heroKind[id]!==kind+S.gender){heroKind[id]=kind+S.gender;const sv=g.querySelector('svg');sv.innerHTML=scene(kind);
     if(work){sv.setAttribute('x',-12);sv.setAttribute('y',-25);sv.setAttribute('width',134);sv.setAttribute('height',100.5)}
     else{sv.setAttribute('x',0);sv.setAttribute('y',0);sv.setAttribute('width',100);sv.setAttribute('height',75)}}
@@ -2570,7 +2607,7 @@ function tipCheck(){if(!S||!S.tips||BUSY||document.getElementById('bk'))return;c
   const d=document.createElement('div');d.id='bk';d.innerHTML=`<div class="bx guide"><h3>${t.ic} Mở khoá: ${t.id==='banda'?partnerWord():t.t}</h3><ul class="gl">${t.l.map(([a,b])=>`<li><b>${a}</b><span>${b}</span></li>`).join('')}</ul><div class="row"><button id="tGuide">📖 Cẩm nang</button><button id="tOk" class="pri">Đã hiểu</button></div></div>`;
   document.body.appendChild(d);d.querySelector('#tOk').onclick=()=>{d.remove();setTimeout(tipCheck,400)};d.querySelector('#tGuide').onclick=()=>{d.remove();guideDlg()}}
 /* ---------- Phiên bản & thông báo bảo trì ---------- */
-const GAME_VER=64,GAME_NOTES='Cẩm nang chia vào từng toà nhà, hiện 1 lần khi lần đầu ghé. Vẽ lại nhân vật nam, nữ. Đổi tên các địa danh, kinh thành nay là Long Thăng.';
+const GAME_VER=65,GAME_NOTES='Nhân vật vẽ theo bảng chibi mới: công tử áo trắng, tiểu thư tóc nâu áo vàng. Thêm biểu cảm vui, ngạc nhiên, buồn, giận, ngại. Làm ruộng đội nón lá; sắc thuốc, rèn vũ khí chạy qua từng công đoạn.';
 async function verWatch(){try{const c=window.claude;if(!c||typeof c.use!=='function')return;const db=await c.use('db');if(!db)return;
   db.doc('meta/version').onSnapshot(s=>{const d=s.exists?s.data():null;if(d&&+d.v>GAME_VER)verBanner(d)},()=>{})}catch(e){}}
 function verBanner(d){if(document.getElementById('verBar'))return;const b=document.createElement('div');b.id='verBar';
