@@ -322,7 +322,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-o
 #bk .story{text-align:center}#bk .story svg{width:100%;height:auto;border-radius:8px;border:2px solid #c9a24f;display:block;margin-bottom:10px}
 #bk .story p{font-size:14px;line-height:1.6;text-align:left;min-height:88px}#bk .story h3{font-size:20px}
 #bk .dots{display:flex;gap:6px;justify-content:center;margin:4px 0 2px}#bk .dots i{width:7px;height:7px;border-radius:50%;background:#e0c88f}#bk .dots i.on{background:#a3302a}
-#bk .guide{max-height:90vh;overflow:auto}#bk .gtabs{display:flex;gap:5px;margin:4px 0 8px}#bk .gtabs button{flex:1;padding:6px 4px;font-size:13px}#bk .gtabs button[aria-pressed="true"]{background:#a3302a;color:#fff3d6;border-color:#d9a73a}
+#bk .guide{max-height:90vh;overflow:auto}#bk .gsub{font-weight:700;color:#7a1f1b;margin:8px 0 2px;font-size:14px}#bk .gtabs{display:flex;gap:5px;margin:4px 0 8px}#bk .gtabs button{flex:1;padding:6px 4px;font-size:13px}#bk .gtabs button[aria-pressed="true"]{background:#a3302a;color:#fff3d6;border-color:#d9a73a}
 #bk .gl{display:flex;flex-direction:column;gap:5px;margin:0;padding:0;list-style:none}#bk .gl li{display:grid;grid-template-columns:26px 1fr;gap:6px;align-items:start;font-size:13px;line-height:1.45;background:#fffdf6;border:1px solid #e0c88f;border-radius:6px;padding:5px 7px}#bk .gl li>b{font-size:17px;text-align:center}
 .stlnk{display:block;margin:8px auto 0;color:#7a1f1b}
 
@@ -395,7 +395,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-o
 <div id="start" hidden>
   <div class="scard">
     <h1>Nhân Sinh Cổ Thành</h1>
-    <p class="sub">Từ một phủ đệ nhỏ, dựng cờ khởi nghĩa: làm nghề, dựng phủ, chiêu binh, giành lại kinh thành Thăng Long.</p>
+    <p class="sub">Từ một phủ đệ nhỏ, dựng cờ khởi nghĩa: làm nghề, dựng phủ, chiêu binh, giành lại kinh thành Long Thăng.</p>
     <div id="contBox"></div><div id="cloudBox"></div><button class="lnk stlnk" id="impBtn" type="button">Khôi phục save từ mã sao lưu</button>
     <div class="picks">
       <button class="pick" id="pickM" aria-pressed="true"></button>
@@ -528,35 +528,35 @@ const PARTNERS={
 const LANDS=[
   {id:'baiboi',n:'Bãi Bồi Ven Sông',ic:'🌾',def:100,x:330,y:470,prod:{lua:6},d:'Đất phù sa màu mỡ, chỉ vài tên giặc cỏ canh giữ.'},
   {id:'rungduoc',n:'Rừng Dược Liệu',ic:'🌿',def:200,x:330,y:200,prod:{thaoduoc:4},d:'Rừng già nhiều sâm quý, bọn lâm tặc chiếm cứ.'},
-  {id:'langchai',n:'Làng Chài Đông Hải',ic:'🐟',def:420,x:330,y:730,prod:{lua:8,money:12},d:'Làng chài trù phú bị hải tặc quấy nhiễu.'},
-  {id:'mosat',n:'Mỏ Sắt Hắc Sơn',ic:'⛏️',def:600,x:540,y:130,prod:{quang:4},d:'Mỏ quặng sắt dưới chân núi đen.'},
-  {id:'binhchau',n:'Thành Bình Châu',ic:'🏯',thanh:1,def:750,x:540,y:410,prod:{money:30,lua:6},d:'Thành nhỏ ven đồng bằng, quân giữ thành còn mỏng.'},
-  {id:'dongnam',n:'Đồng Lúa Nam Bình',ic:'🌾',def:900,x:540,y:690,prod:{lua:16},d:'Cánh đồng cò bay thẳng cánh, do một hào trưởng chiếm giữ.'},
-  {id:'mobacgiang',n:'Mỏ Sắt Bắc Giang',ic:'⛏️',def:1100,x:750,y:250,prod:{quang:5},d:'Mỏ sắt lộ thiên, quặng tốt cho lò rèn.'},
-  {id:'thanhha',n:'Thành Thanh Hà',ic:'🏯',thanh:1,def:1300,x:750,y:530,prod:{money:45,lua:8},d:'Thành buôn bán sầm uất bên sông.'},
-  {id:'mobac',n:'Mỏ Bạc Thanh Phong',ic:'<i class="ag"></i>',def:1500,x:750,y:790,prod:{money:45},d:'Mạch bạc lộ thiên, quân canh đông đảo.'},
-  {id:'vandon',n:'Thành Vân Đồn',ic:'🏯',thanh:1,def:1800,x:960,y:760,prod:{money:60},d:'Thương cảng tấp nập thuyền buôn.'},
-  {id:'sontrai',n:'Sơn Trại Hắc Phong',ic:'🏴',def:2100,x:960,y:480,prod:{money:25,quang:3},loot:300,d:'Sào huyệt thổ phỉ. Diệt được sẽ thu chiến lợi phẩm.'},
-  {id:'phongchau',n:'Thành Phong Châu',ic:'🏯',thanh:1,def:2400,x:960,y:190,prod:{money:70,lua:10},d:'Thành cổ trên vùng trung du.'},
-  {id:'mobactq',n:'Mỏ Bạc Tuyên Quang',ic:'<i class="ag"></i>',def:2700,x:1170,y:330,prod:{money:60},d:'Mỏ bạc trong thung lũng sâu.'},
-  {id:'longbien',n:'Thành Long Biên',ic:'🏯',thanh:1,def:3300,x:1170,y:600,prod:{money:90,lua:10},d:'Thành lớn bên sông Cái, tường cao hào sâu.'},
-  {id:'movang',n:'Mỏ Vàng Kim Sơn',ic:'🥇',def:3600,x:1170,y:110,prod:{vang:2},d:'Mỏ vàng quý nhất vùng, có tinh binh trấn giữ.'},
-  {id:'mosattn',n:'Mỏ Sắt Thái Nguyên',ic:'⛏️',def:4000,x:1170,y:830,prod:{quang:8},d:'Mỏ sắt lớn nhất vùng, có trại lính canh.'},
-  {id:'taydo',n:'Thành Tây Đô',ic:'🏯',thanh:1,def:4800,x:1380,y:220,prod:{money:110,lua:15},d:'Thành đá kiên cố của một vị tướng cát cứ.'},
-  {id:'movangbm',n:'Mỏ Vàng Bồng Miêu',ic:'🥇',def:5400,x:1380,y:470,prod:{vang:3},d:'Mỏ vàng lâu đời, tinh binh canh giữ ngày đêm.'},
-  {id:'coloa',n:'Thành Cổ Loa',ic:'🏯',thanh:1,def:6500,x:1380,y:730,prod:{money:130,lua:15},d:'Thành xoáy ốc nhiều vòng, rất khó công phá.'},
-  {id:'moda',n:'Mỏ Đá Quý Lục Yên',ic:'💎',def:7500,x:1590,y:105,prod:{money:90,vang:1},d:'Mỏ đá quý hiếm có, giá trị liên thành.'},
-  {id:'lacduong',n:'Thành Lạc Dương',ic:'🏯',thanh:1,def:9000,x:1590,y:300,prod:{money:150,lua:20},d:'Thành trì lân bang hùng mạnh. Chiếm được thì xưng bá một phương.'},
-  {id:'quangyen',n:'Thành Quảng Yên',ic:'🏯',thanh:1,def:8500,x:1590,y:540,prod:{money:140,lua:18},d:'Thành ven biển, thuỷ quân hùng mạnh.'},
-  {id:'mosatdt',n:'Mỏ Sắt Đông Triều',ic:'⛏️',def:8000,x:1590,y:790,prod:{quang:10},d:'Mỏ sắt sâu trong núi đá vôi.'},
-  {id:'mosatls',n:'Mỏ Sắt Lạng Sơn',ic:'⛏️',def:9500,x:1800,y:130,prod:{quang:12},d:'Mỏ sắt biên ải, quân trấn biên canh giữ.'},
-  {id:'daila',n:'Thành Đại La',ic:'🏯',thanh:1,def:11000,x:1800,y:370,prod:{money:170,lua:20},d:'Thành cổ đồ sộ, binh lính tinh nhuệ.'},
-  {id:'mobaccb',n:'Mỏ Bạc Cao Bằng',ic:'<i class="ag"></i>',def:10000,x:1800,y:610,prod:{money:120},d:'Mạch bạc lớn nhất phương Bắc.'},
-  {id:'hoalu',n:'Thành Hoa Lư',ic:'🏯',thanh:1,def:12500,x:1800,y:830,prod:{money:180,lua:22},d:'Kinh đô cũ giữa núi non hiểm trở.'},
-  {id:'movanglc',n:'Mỏ Vàng Lai Châu',ic:'🥇',def:13000,x:2010,y:190,prod:{vang:4},d:'Mỏ vàng trên cao nguyên, sơn tặc hung hãn.'},
-  {id:'modayb',n:'Mỏ Đá Quý Yên Bái',ic:'💎',def:14000,x:2010,y:460,prod:{money:130,vang:2},d:'Hồng ngọc, lam ngọc nổi danh thiên hạ.'},
-  {id:'hoian',n:'Thành Hội An',ic:'🏯',thanh:1,def:15000,x:2010,y:740,prod:{money:200,lua:25},d:'Thương cảng quốc tế, giàu có bậc nhất.'},
-  {id:'thanglong',n:'Kinh thành Thăng Long',ic:'👑',thanh:1,kinh:1,def:30000,x:2230,y:470,prod:{money:400,lua:40},d:'Kinh đô phồn hoa, cấm quân hùng hậu nhất thiên hạ. Chỉ đánh được khi đã chiếm đủ 8 thành trì khác. Chiếm được sẽ lên ngôi Hoàng đế.'},
+  {id:'langchai',n:'Làng Chài Châu Hải',ic:'🐟',def:420,x:330,y:730,prod:{lua:8,money:12},d:'Làng chài trù phú bị hải tặc quấy nhiễu.'},
+  {id:'mosat',n:'Mỏ Sắt Trung Kiên',ic:'⛏️',def:600,x:540,y:130,prod:{quang:4},d:'Mỏ quặng sắt dưới chân núi đen.'},
+  {id:'binhchau',n:'Thành Thuận Bình',ic:'🏯',thanh:1,def:750,x:540,y:410,prod:{money:30,lua:6},d:'Thành nhỏ ven đồng bằng, quân giữ thành còn mỏng.'},
+  {id:'dongnam',n:'Đồng Lúa Định Nam',ic:'🌾',def:900,x:540,y:690,prod:{lua:16},d:'Cánh đồng cò bay thẳng cánh, do một hào trưởng chiếm giữ.'},
+  {id:'mobacgiang',n:'Mỏ Sắt Ninh Bắc',ic:'⛏️',def:1100,x:750,y:250,prod:{quang:5},d:'Mỏ sắt lộ thiên, quặng tốt cho lò rèn.'},
+  {id:'thanhha',n:'Thành Hoá Thanh',ic:'🏯',thanh:1,def:1300,x:750,y:530,prod:{money:45,lua:8},d:'Thành buôn bán sầm uất bên sông.'},
+  {id:'mobac',n:'Mỏ Bạc Giang Tiền',ic:'<i class="ag"></i>',def:1500,x:750,y:790,prod:{money:45},d:'Mạch bạc lộ thiên, quân canh đông đảo.'},
+  {id:'vandon',n:'Thành Long Hạ',ic:'🏯',thanh:1,def:1800,x:960,y:760,prod:{money:60},d:'Thương cảng tấp nập thuyền buôn.'},
+  {id:'sontrai',n:'Sơn Trại Đồng Lâm',ic:'🏴',def:2100,x:960,y:480,prod:{money:25,quang:3},loot:300,d:'Sào huyệt thổ phỉ. Diệt được sẽ thu chiến lợi phẩm.'},
+  {id:'phongchau',n:'Thành Yên Hưng',ic:'🏯',thanh:1,def:2400,x:960,y:190,prod:{money:70,lua:10},d:'Thành cổ trên vùng trung du.'},
+  {id:'mobactq',n:'Mỏ Bạc Quang Tuyên',ic:'<i class="ag"></i>',def:2700,x:1170,y:330,prod:{money:60},d:'Mỏ bạc trong thung lũng sâu.'},
+  {id:'longbien',n:'Thành Hoà Biên',ic:'🏯',thanh:1,def:3300,x:1170,y:600,prod:{money:90,lua:10},d:'Thành lớn bên bờ sông lớn, tường cao hào sâu.'},
+  {id:'movang',n:'Mỏ Vàng Sơn Kim',ic:'🥇',def:3600,x:1170,y:110,prod:{vang:2},d:'Mỏ vàng quý nhất vùng, có tinh binh trấn giữ.'},
+  {id:'mosattn',n:'Mỏ Sắt Nguyên Thái',ic:'⛏️',def:4000,x:1170,y:830,prod:{quang:8},d:'Mỏ sắt lớn nhất vùng, có trại lính canh.'},
+  {id:'taydo',n:'Thành Ninh Tây',ic:'🏯',thanh:1,def:4800,x:1380,y:220,prod:{money:110,lua:15},d:'Thành đá kiên cố của một vị tướng cát cứ.'},
+  {id:'movangbm',n:'Mỏ Vàng Miêu Bồng',ic:'🥇',def:5400,x:1380,y:470,prod:{vang:3},d:'Mỏ vàng lâu đời, tinh binh canh giữ ngày đêm.'},
+  {id:'coloa',n:'Thành Giang Hậu',ic:'🏯',thanh:1,def:6500,x:1380,y:730,prod:{money:130,lua:15},d:'Thành xoáy ốc nhiều vòng, rất khó công phá.'},
+  {id:'moda',n:'Mỏ Đá Quý Yên Lục',ic:'💎',def:7500,x:1590,y:105,prod:{money:90,vang:1},d:'Mỏ đá quý hiếm có, giá trị liên thành.'},
+  {id:'lacduong',n:'Thành Lạt Đà',ic:'🏯',thanh:1,def:9000,x:1590,y:300,prod:{money:150,lua:20},d:'Thành trì lân bang hùng mạnh. Chiếm được thì xưng bá một phương.'},
+  {id:'quangyen',n:'Thành Nam Quảng',ic:'🏯',thanh:1,def:8500,x:1590,y:540,prod:{money:140,lua:18},d:'Thành ven biển, thuỷ quân hùng mạnh.'},
+  {id:'mosatdt',n:'Mỏ Sắt Triều Đông',ic:'⛏️',def:8000,x:1590,y:790,prod:{quang:10},d:'Mỏ sắt sâu trong núi đá vôi.'},
+  {id:'mosatls',n:'Mỏ Sắt Sơn Lạng',ic:'⛏️',def:9500,x:1800,y:130,prod:{quang:12},d:'Mỏ sắt biên ải, quân trấn biên canh giữ.'},
+  {id:'daila',n:'Thành Hoà Khánh',ic:'🏯',thanh:1,def:11000,x:1800,y:370,prod:{money:170,lua:20},d:'Thành cổ đồ sộ, binh lính tinh nhuệ.'},
+  {id:'mobaccb',n:'Mỏ Bạc Bằng Cao',ic:'<i class="ag"></i>',def:10000,x:1800,y:610,prod:{money:120},d:'Mạch bạc lớn nhất phương Bắc.'},
+  {id:'hoalu',n:'Thành Lư Hoa',ic:'🏯',thanh:1,def:12500,x:1800,y:830,prod:{money:180,lua:22},d:'Kinh đô cũ giữa núi non hiểm trở.'},
+  {id:'movanglc',n:'Mỏ Vàng Châu Lai',ic:'🥇',def:13000,x:2010,y:190,prod:{vang:4},d:'Mỏ vàng trên cao nguyên, sơn tặc hung hãn.'},
+  {id:'modayb',n:'Mỏ Đá Quý Bái Yên',ic:'💎',def:14000,x:2010,y:460,prod:{money:130,vang:2},d:'Hồng ngọc, lam ngọc nổi danh thiên hạ.'},
+  {id:'hoian',n:'Thành An Hội',ic:'🏯',thanh:1,def:15000,x:2010,y:740,prod:{money:200,lua:25},d:'Thương cảng quốc tế, giàu có bậc nhất.'},
+  {id:'thanglong',n:'Kinh thành Long Thăng',ic:'👑',thanh:1,kinh:1,def:30000,x:2230,y:470,prod:{money:400,lua:40},d:'Kinh đô phồn hoa, cấm quân hùng hậu nhất thiên hạ. Chỉ đánh được khi đã chiếm đủ 8 thành trì khác. Chiếm được sẽ lên ngôi Hoàng đế.'},
 ];
 const BUILDINGS=[
   {id:'home',n:'Phủ Đệ',x:160,y:140,w:150,roof:'#a3302a',wall:'#f2e3c0',d:'Nhà của ta. Bấm tab Phủ Đệ để xem bản đồ phủ.'},
@@ -669,7 +669,7 @@ RANKS.forEach(r=>r.b=(r.sal?`${r.emp?'Ngân khố':'Bổng lộc'} ${r.sal} bạ
 const FAME_OFF=700;
 function cities(s){return LANDS.filter(l=>l.thanh&&s.lands[l.id]).length}
 function rankOk(s,i){const r=RANKS[i];if(r&&r.emp)return !!s.lands.thanglong;return r&&(s.fame||0)>=r.f&&cities(s)>=(r.lands||0)&&s.soldiers>=(r.sol||0)}
-function rankNeed(i){const r=RANKS[i],L=cities(S),o=[];if(r.emp)return ['chiếm Kinh thành Thăng Long'];
+function rankNeed(i){const r=RANKS[i],L=cities(S),o=[];if(r.emp)return ['chiếm Kinh thành Long Thăng'];
   if((S.fame||0)<r.f)o.push(`${fmt(r.f)} danh vọng`);if(L<(r.lands||0))o.push(`${r.lands} thành trì (có ${L})`);if(S.soldiers<(r.sol||0))o.push(`${r.sol} quân (có ${S.soldiers})`);return o}
 function myRank(){return RANKS[S.rank||0]}
 function checkRank(){let up=false;while(rankOk(S,(S.rank||0)+1)){S.rank=(S.rank||0)+1;up=true}
@@ -702,9 +702,9 @@ function convertSec(z){
   const c=m=>A(`💂 Chuyển ${m} lính`,{k:'recruit',gain:`→ ${ic} ${W0.n.toLowerCase()}, không đổi lại`,lock:freeSol()<m?'Không đủ lính rảnh':n+m>sl?`${HOME_ZONES[z].n} chỉ cần ${sl} người`:null,run:()=>{S.soldiers-=m;S.workers[k]=n+m;return `${m} quân lính cởi giáp, thành ${W0.n.toLowerCase()} của phủ.`}});
   return h+`<div class="row2">${c(1)}${c(5)}</div></div>`}
 function crown(){if(S.emperor)return;S.emperor=true;S.rank=RANKS.length-1;S.official=true;
-  const m=`Thành tựu: Lên ngôi Hoàng đế! ${S.name} chiếm Kinh thành Thăng Long, thống nhất giang sơn.`;log(m);save();renderAll();
+  const m=`Thành tựu: Lên ngôi Hoàng đế! ${S.name} chiếm Kinh thành Long Thăng, thống nhất giang sơn.`;log(m);save();renderAll();
   const d=document.createElement('div');d.id='bk';
-  d.innerHTML=`<div class="bx crown"><div class="cr">👑</div><h3>Lên ngôi Hoàng đế</h3><p>Kinh thành Thăng Long đã mở cổng. Bá quan văn võ quỳ lạy, ${esc(S.name)} chính thức lên ngôi Hoàng đế, thống nhất cả vương quốc.</p><p><b>Hoàn thành bản đồ 1.</b> Bạn vẫn có thể tiếp tục trị vì: ngân khố ${myRank().sal} bạc mỗi ngày, nuôi tối đa ${myRank().cap} người và tự đặt thuế cho cả vương quốc bằng cách bấm vào ô thuế.</p><div class="row"><button id="bkClose" class="pri">Tiếp tục trị vì</button></div></div>`;
+  d.innerHTML=`<div class="bx crown"><div class="cr">👑</div><h3>Lên ngôi Hoàng đế</h3><p>Kinh thành Long Thăng đã mở cổng. Bá quan văn võ quỳ lạy, ${esc(S.name)} chính thức lên ngôi Hoàng đế, thống nhất cả vương quốc.</p><p><b>Hoàn thành bản đồ 1.</b> Bạn vẫn có thể tiếp tục trị vì: ngân khố ${myRank().sal} bạc mỗi ngày, nuôi tối đa ${myRank().cap} người và tự đặt thuế cho cả vương quốc bằng cách bấm vào ô thuế.</p><div class="row"><button id="bkClose" class="pri">Tiếp tục trị vì</button></div></div>`;
   document.body.appendChild(d);d.querySelector('#bkClose').onclick=()=>d.remove()}
 function taxDlg(){
   const d=document.createElement('div');d.id='bk';
@@ -717,7 +717,7 @@ function fameAdd(n,why){if(n)S.fame=(S.fame||0)+n;checkRank()}
 function rankDlg(){
   const d=document.createElement('div');d.id='bk';const cur=S.rank||0;
   d.innerHTML=`<div class="bx"><h3>Quan lộ</h3><p>Danh vọng hiện có: <b>${fmt(S.fame||0)}</b>. Đủ điều kiện là được thăng chức ngay; chức cao cần thêm thành trì và quân lính.</p><div class="rk">${RANKS.map((r,i)=>{const nd=i>cur?rankNeed(i):[];
-    return `<div class="${i===cur?'cur':i<cur?'done':''}"><b>${r.n}</b><span>${i===0?'Khởi đầu':r.emp?'Chiếm Kinh thành Thăng Long':`${fmt(r.f)} danh vọng${r.lands?` · ${r.lands} thành trì`:''}${r.sol?` · ${r.sol} quân`:''}`}</span><small>${r.b}${i===cur?' · <em>chức hiện tại</em>':nd.length&&i===cur+1?` · còn thiếu: ${nd.join(', ')}`:''}</small></div>`}).join('')}</div><div class="row"><button id="bkClose">Đóng</button></div></div>`;
+    return `<div class="${i===cur?'cur':i<cur?'done':''}"><b>${r.n}</b><span>${i===0?'Khởi đầu':r.emp?'Chiếm Kinh thành Long Thăng':`${fmt(r.f)} danh vọng${r.lands?` · ${r.lands} thành trì`:''}${r.sol?` · ${r.sol} quân`:''}`}</span><small>${r.b}${i===cur?' · <em>chức hiện tại</em>':nd.length&&i===cur+1?` · còn thiếu: ${nd.join(', ')}`:''}</small></div>`}).join('')}</div><div class="row"><button id="bkClose">Đóng</button></div></div>`;
   document.body.appendChild(d);d.querySelector('#bkClose').onclick=()=>d.remove();
 }
 function taxInfo(){const per=Math.floor((S.day-1)/15);
@@ -820,7 +820,7 @@ function fresh(name,gender){
     partners:[],soldiers:0,wounded:0,gar:{},lv15:1,armyLv:1,lands:{},
     log:[],focus:null,learnDays:[],fame:0,official:false,rank:0,tab:'home',selLand:null,zone:'phong',wx:rollWx(),wxNext:rollWx()};
 }
-function migrate(s){if(s.quests&&s.quests.list)s.quests.list=s.quests.list.filter(q=>!['gift','odd','eat'].includes(q.t));if(!s.lv15&&s.home){for(const z in s.home)s.home[z]=LVMAP[s.home[z]]??s.home[z];s.lv15=1}if(s.speed!==20)s.speed=10;if(!s.tk){s.tk={};for(const k of ['nong','ren','y']){const t=(s.tools||{})[k]||0;s.tk[k]=[0,0,0,0];if(t)s.tk[k][t]=(s.workers||{})[k]||0}}if(s.wounded==null)s.wounded=0;if(!s.gar){s.gar={};let f=s.soldiers||0;for(const l of LANDS)if(s.lands&&s.lands[l.id]){const n=Math.min(f,Math.max(2,Math.ceil(l.def/300)));if(n)s.gar[l.id]=n;f-=n}}if(!s.led)s.led={inc:{},exp:{},tax:0};
+function migrate(s){if(!s.ptip&&s.day>1){s.ptip={};for(const k in PTIPS)s.ptip[k]=1}if(s.quests&&s.quests.list)s.quests.list=s.quests.list.filter(q=>!['gift','odd','eat'].includes(q.t));if(!s.lv15&&s.home){for(const z in s.home)s.home[z]=LVMAP[s.home[z]]??s.home[z];s.lv15=1}if(s.speed!==20)s.speed=10;if(!s.tk){s.tk={};for(const k of ['nong','ren','y']){const t=(s.tools||{})[k]||0;s.tk[k]=[0,0,0,0];if(t)s.tk[k][t]=(s.workers||{})[k]||0}}if(s.wounded==null)s.wounded=0;if(!s.gar){s.gar={};let f=s.soldiers||0;for(const l of LANDS)if(s.lands&&s.lands[l.id]){const n=Math.min(f,Math.max(2,Math.ceil(l.def/300)));if(n)s.gar[l.id]=n;f-=n}}if(!s.led)s.led={inc:{},exp:{},tax:0};
   if(s.focus===undefined){let b=null;for(const k in s.prof)if(s.prof[k].l&&(!b||s.prof[k].xp>s.prof[b].xp))b=k;s.focus=b}if(!s.zone)s.zone='phong';if(!s.wx){s.wx=rollWx();s.wxNext=rollWx()}if(!s.learnDays){s.learnDays=[];for(const k in s.prof)if(s.prof[k].l)s.learnDays.push(1)}if(s.fame==null){let f=0;for(const k in s.home)for(let l=2-(k==='phong'?0:1);l<=s.home[k];l++)if(l>0)f+=k==='phong'?15*l:5*l;
     for(const k in s.prof)if(s.prof[k].l){let st=0;for(let i=0;i<STEP_XP.length;i++)if(s.prof[k].xp>=STEP_XP[i])st=i;f+=3*st+15*Math.min(5,Math.floor(st/5))}
     s.fame=f+2*(s.day-1);s.official=false}
@@ -1040,7 +1040,7 @@ function sellPrice(k){return Math.round(SELL[k]*(1+.08*(fx('thuong')?plv('thuong
 function eatMul(){return 1+(fx('y')?.08*(plv('y')+1):0)+perk('eat')}
 function title(){
   if(S.rank)return myRank().n;
-  if(S.lands.lacduong)return 'Bá chủ Lạc Dương';
+  if(S.lands.lacduong)return 'Bá chủ Lạt Đà';
   let best=null;for(const k in PROFS)if(S.prof[k].l&&(!best||S.prof[k].xp>S.prof[best].xp))best=k;
   return best?`${lvName(best)} ${PROFS[best].full.toLowerCase()}`:'Bình dân áo vải';
 }
@@ -1067,10 +1067,10 @@ function heroM(o={}){
   const eyes=o.sleep?`<path d="M32 49 q6 4 12 0 M56 49 q6 4 12 0" stroke="#1d2440" stroke-width="2.6" fill="none" stroke-linecap="round"/>`
    :`<g><ellipse cx="39" cy="48" rx="5.4" ry="6.6" fill="#1d2440"/><ellipse cx="39" cy="50.5" rx="3.8" ry="3.6" fill="#4d6aa8"/><circle cx="40.8" cy="45.6" r="2" fill="#fff"/><circle cx="37.4" cy="51.6" r="1" fill="#fff"/>
      <ellipse cx="61" cy="48" rx="5.4" ry="6.6" fill="#1d2440"/><ellipse cx="61" cy="50.5" rx="3.8" ry="3.6" fill="#4d6aa8"/><circle cx="62.8" cy="45.6" r="2" fill="#fff"/><circle cx="59.4" cy="51.6" r="1" fill="#fff"/>
-     <path d="M32.5 42.5 Q39 39.5 45.5 42.5 M54.5 42.5 Q61 39.5 67.5 42.5" stroke="#15131a" stroke-width="2.3" fill="none" stroke-linecap="round"/></g>`;
+     <path d="M32.5 42.5 Q39 39.5 45.5 42.5 M54.5 42.5 Q61 39.5 67.5 42.5" stroke="#15131a" stroke-width="2.3" fill="none" stroke-linecap="round"/><path d="M45.5 42.5 l2.2 -1.6 M67.5 42.5 l2.2 -1.6" stroke="#15131a" stroke-width="1.4" stroke-linecap="round"/><path d="M35.5 55.6 Q39 56.8 42.5 55.6 M57.5 55.6 Q61 56.8 64.5 55.6" stroke="#8a6a64" stroke-width=".9" fill="none"/></g>`;
   const brow=o.angry?'<path d="M31 35 L45 40 M69 35 L55 40" stroke="#15131a" stroke-width="3" stroke-linecap="round"/>'
    :o.tear?'<path d="M32 39 L44 36 M68 39 L56 36" stroke="#15131a" stroke-width="2.4" stroke-linecap="round"/><path d="M36 56 q-3 7 0 10 q3 -3 0 -10z M64 56 q-3 7 0 10 q3 -3 0 -10z" fill="#7fc4ff"/>'
-   :'<path d="M33 37 Q38.5 35 44 36.5 M56 36.5 Q61.5 35 67 37" stroke="#2a2630" stroke-width="1.6" fill="none" stroke-linecap="round"/>';
+   :'<path d="M33 34 Q38.5 32 44 33.5 M56 33.5 Q61.5 32 67 34" stroke="#2a2630" stroke-width="1.6" fill="none" stroke-linecap="round"/>';
   const mouth=o.shout?'<ellipse cx="50" cy="61" rx="4.5" ry="4" fill="#8a3b2c"/>':o.tear?'<path d="M46 62 Q50 58.5 54 62" stroke="#8a3b2c" stroke-width="1.8" fill="none" stroke-linecap="round"/>'
    :o.sleep?'<path d="M47 60 Q50 62 53 60" stroke="#8a3b2c" stroke-width="1.6" fill="none" stroke-linecap="round"/>':'<path d="M46.5 60 Q50 61.6 53.5 60" stroke="#8a3b2c" stroke-width="1.8" fill="none" stroke-linecap="round"/>';
   return `<svg viewBox="-2 -6 104 128" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -1089,10 +1089,10 @@ function heroM(o={}){
   <path d="M84 100 Q78 104 71 102" stroke="${nv}" stroke-width="3" fill="none" stroke-linecap="round"/>
   <circle cx="21" cy="101" r="4.6" fill="${skin}"/><circle cx="79" cy="101" r="4.6" fill="${skin}"/>
   ${o.sword?'':`<g transform="rotate(-28 56 80)"><rect x="52" y="72" width="7" height="17" rx="1.5" fill="#2a2630"/><path d="M53 74 h5 M53 78 h5 M53 82 h5" stroke="#55505e" stroke-width=".8"/></g><circle cx="57" cy="85" r="3.6" fill="${skin}"/>`}
-  <circle cx="50" cy="42" r="30" fill="${skin}"/>
+  <circle cx="50" cy="42" r="30" fill="${skin}" stroke="#5a4636" stroke-width=".8"/>
   <ellipse cx="48" cy="7" rx="10" ry="9" fill="${hair}"/><path d="M41 3 Q48 -2 55 3" stroke="${hl}" stroke-width="1.6" fill="none"/>
-  <path d="M39 10 L30 4 L31 12 Z M39 10 L31 16 L36 17 Z" fill="${rb}" stroke="#6d84bd" stroke-width=".8"/><rect x="37" y="7.5" width="4" height="5" rx="1" fill="${rb}"/>
-  <path d="M19 46 Q16 14 46 11 Q78 10 82 40 Q81 50 79 58 Q76 40 70 30 Q62 22 54 24 Q40 28 33 38 Q28 46 26 60 Q20 56 19 46 Z" fill="${hair}"/>
+  <path d="M39 10 L30 4 L31 12 Z M39 10 L31 16 L36 17 Z" fill="${rb}" stroke="#6d84bd" stroke-width=".8"/><rect x="37" y="7.5" width="4" height="5" rx="1" fill="${rb}"/><path d="M38 12 Q33 22 30 30 M39 12 Q37 20 36 28" stroke="${rb}" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  <path d="M19 46 Q16 14 46 11 Q78 10 82 40 Q81 50 79 58 Q76 40 70 30 Q62 22 54 24 Q40 28 33 38 Q28 46 26 60 Q20 56 19 46 Z" fill="${hair}" stroke="#0e0d12" stroke-width=".8"/>
   <path d="M54 24 Q46 34 44 44 Q40 34 33 38" fill="${hair}"/>
   <path d="M27 50 Q24 64 30 72 Q27 60 30 50 Z" fill="${hair}"/>
   <path d="M75 40 Q80 56 76 70 Q74 58 72 46 Z" fill="${hair}"/>
@@ -1105,7 +1105,51 @@ function heroM(o={}){
   ${o.wow?'<path d="M24 26 l-7 -6 M76 26 l7 -6 M50 -10 v-6" stroke="#f0cf7a" stroke-width="2.4" stroke-linecap="round"/>':''}
   ${o.sword?`<path d="M80 100 L100 48" stroke="${o.sword===1?'#d6dbe2':o.sword}" stroke-width="4.5" stroke-linecap="round"/><path d="M73 96 L87 103" stroke="#6b4a2e" stroke-width="4.5" stroke-linecap="round"/><circle cx="79" cy="101" r="4.6" fill="${skin}"/>`:''}
   </svg>`}
+/* Tiểu thư: tóc dài buông, búi cài trâm phượng tua rua, áo trong ngọc bích thêu hoa, áo khoác vàng tay rộng, dải lụa hồng */
+function heroF(pal={},o={}){
+  const hair=pal.hair||'#3a3340',hl='#6a6178',out=pal.robe&&pal.robe!=='#4a8fdc'?pal.robe:'#f1c46e',inn=pal.robe&&pal.robe!=='#4a8fdc'?'#fbf3e4':'#8fd6cb',sash=pal.trim&&pal.trim!=='#d9a73a'?pal.trim:'#f29db5',skin='#fde8d6',ln='#5a4636';
+  const eye=(x,f)=>`<g><path d="M${x-6.5} ${45} Q${x} ${39.5} ${x+6.5} ${45} L${x+6} ${53} Q${x} ${57} ${x-6} ${53} Z" fill="#3d3a4a"/><ellipse cx="${x}" cy="51" rx="4.6" ry="4" fill="#7b7f9e"/><ellipse cx="${x}" cy="52.6" rx="3" ry="2" fill="#aab3cf" opacity=".8"/>
+    <circle cx="${x+1.8}" cy="46.4" r="2.3" fill="#fff"/><circle cx="${x-2.4}" cy="53" r="1.1" fill="#fff"/>
+    <path d="M${x-7.5} ${45.5} Q${x} ${38} ${x+7.5} ${44.5}" stroke="#211b22" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M${x+(f?-7.5:7.5)} ${f?45.5:44.5} l${f?-2.6:2.6} -2.2" stroke="#211b22" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M${x-4} 56.4 Q${x} 57.8 ${x+4} 56.4" stroke="#8a6a64" stroke-width=".9" fill="none"/></g>`;
+  const eyes=o.sleep?`<path d="M32 50 q6 4.5 12 0 M56 50 q6 4.5 12 0" stroke="#211b22" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M31 51 l-2 2 M69 51 l2 2" stroke="#211b22" stroke-width="1.4"/>`:eye(38,1)+eye(62,0);
+  const brow=o.angry?'<path d="M31 37 L44 41 M69 37 L56 41" stroke="#3a3340" stroke-width="2.4" stroke-linecap="round"/>':o.tear?'<path d="M32 40 L44 37 M68 40 L56 37" stroke="#3a3340" stroke-width="2" stroke-linecap="round"/><path d="M35 57 q-3 7 0 10 q3 -3 0 -10z M65 57 q-3 7 0 10 q3 -3 0 -10z" fill="#9fd4ff"/>':'<path d="M33 34.5 Q38 32.5 43 33.5 M57 33.5 Q62 32.5 67 34.5" stroke="#6a5a62" stroke-width="1.3" fill="none" stroke-linecap="round"/>';
+  const mouth=o.shout?'<ellipse cx="50" cy="62" rx="3.6" ry="4.2" fill="#c0545a"/><ellipse cx="50" cy="63.6" rx="2.2" ry="1.6" fill="#f2949a"/>':o.tear?'<path d="M47 63 Q50 60.5 53 63" stroke="#b04a50" stroke-width="1.6" fill="none" stroke-linecap="round"/>':'<path d="M47.2 61 Q50 63.6 52.8 61" stroke="#b04a50" stroke-width="1.6" fill="none" stroke-linecap="round"/>';
+  const dot=(x,y)=>`<g transform="translate(${x} ${y})"><path d="M0 -3 L.9 -.9 L3 0 L.9 .9 L0 3 L-.9 .9 L-3 0 L-.9 -.9Z" fill="#9b8fd6"/><circle r=".9" fill="#f6e3a0"/></g>`;
+  return `<svg viewBox="-2 -6 104 128" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <ellipse cx="50" cy="116" rx="28" ry="4" fill="rgba(0,0,0,.16)"/>
+  <path d="M22 36 Q10 64 12 90 Q10 104 4 114 Q22 110 30 98 L70 98 Q78 110 96 114 Q90 104 88 90 Q90 64 78 36 Z" fill="${hair}" stroke="#241f29" stroke-width=".8"/>
+  <path d="M16 70 Q14 92 8 108 M84 70 Q86 92 92 108 M22 60 Q20 84 18 100" stroke="${hl}" stroke-width="1" fill="none" opacity=".7"/>
+  <path d="M33 68 Q50 62 67 68 L74 110 Q50 116 26 110 Z" fill="${inn}" stroke="${ln}" stroke-width=".9"/>
+  ${dot(38,90)}${dot(56,96)}${dot(64,84)}${dot(44,104)}${dot(62,106)}
+  <path d="M33 68 Q24 80 20 112 L34 112 Q34 90 39 70 Z" fill="${out}" stroke="${ln}" stroke-width=".9"/>
+  <path d="M67 68 Q76 80 80 112 L66 112 Q66 90 61 70 Z" fill="${out}" stroke="${ln}" stroke-width=".9"/>
+  <path d="M40 68 L50 80 L60 68" fill="none" stroke="${out}" stroke-width="3.2"/><path d="M40 68 L50 80 L60 68" fill="none" stroke="${ln}" stroke-width=".7"/>
+  <path d="M35 84 Q50 88 65 84 L65 90 Q50 94 35 90 Z" fill="${sash}" stroke="${ln}" stroke-width=".7"/>
+  <path d="M48 90 Q44 104 40 116 M52 90 Q58 102 66 114" stroke="${sash}" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <path d="M32 70 Q14 78 12 104 Q20 112 32 106 Q34 92 37 78 Z" fill="${out}" stroke="${ln}" stroke-width=".9"/>
+  <path d="M68 70 Q86 78 88 104 Q80 112 68 106 Q66 92 63 78 Z" fill="${out}" stroke="${ln}" stroke-width=".9"/>
+  <path d="M18 92 q6 -4 10 2 q-4 6 -10 2z M24 86 q4 -2 5 2" fill="none" stroke="#e7a7a0" stroke-width=".9" opacity=".8"/>
+  <path d="M14 104 Q22 108 31 105" stroke="${inn}" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M86 104 Q78 108 69 105" stroke="${inn}" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+  <circle cx="22" cy="104" r="4.3" fill="${skin}" stroke="${ln}" stroke-width=".6"/><circle cx="78" cy="104" r="4.3" fill="${skin}" stroke="${ln}" stroke-width=".6"/>
+  <circle cx="50" cy="42" r="30" fill="${skin}" stroke="${ln}" stroke-width=".8"/>
+  <ellipse cx="62" cy="9" rx="13" ry="10" fill="${hair}" stroke="#241f29" stroke-width=".8"/><path d="M53 6 Q62 0 72 6" stroke="${hl}" stroke-width="1.2" fill="none"/>
+  <path d="M19 46 Q16 12 50 11 Q84 12 81 46 Q78 34 70 28 Q66 38 58 40 Q62 32 60 24 Q52 34 40 36 Q46 30 46 22 Q36 30 26 34 Q22 40 19 46 Z" fill="${hair}" stroke="#241f29" stroke-width=".8"/>
+  <path d="M22 44 Q18 60 24 76 Q26 62 27 50 Z M78 44 Q82 60 76 76 Q74 62 73 50 Z" fill="${hair}" stroke="#241f29" stroke-width=".7"/>
+  <path d="M28 22 Q46 12 70 18" stroke="${hl}" stroke-width="1.3" fill="none" stroke-linecap="round" opacity=".8"/>
+  <g transform="translate(68 8)"><path d="M-4 0 Q2 -14 14 -10 Q8 -6 10 2 Q4 -2 -4 0Z" fill="#5fb6c9" stroke="#2f6f86" stroke-width=".8"/><path d="M-2 2 Q8 -4 16 4 Q8 4 4 10 Q2 4 -2 2Z" fill="#7fcadb" stroke="#2f6f86" stroke-width=".8"/>
+    <circle cx="2" cy="-1" r="2.6" fill="#e2b544" stroke="#9a7420" stroke-width=".6"/><circle cx="8" cy="-8" r="1.2" fill="#e04b5a"/><circle cx="12" cy="1" r="1.2" fill="#e04b5a"/>
+    <path d="M6 8 v18 M10 7 v15 M14 5 v12" stroke="#c9a24f" stroke-width=".9"/><circle cx="6" cy="27" r="1.4" fill="#e04b5a"/><circle cx="10" cy="23" r="1.3" fill="#5fb6c9"/><circle cx="14" cy="18" r="1.2" fill="#e2b544"/></g>
+  <path d="M44 6 Q48 0 54 2" stroke="#5fb6c9" stroke-width="2" fill="none" stroke-linecap="round"/>
+  ${o.crown?'<path d="M36 10 L39 1 L44 6 L48 -2 L52 6 L56 1 L60 10 Z" fill="#f0cf7a" stroke="#b07d1a" stroke-width="1"/>':''}
+  ${eyes}${brow}
+  <ellipse cx="30" cy="58" rx="5" ry="2.8" fill="#f7a1a8" opacity=".5"/><ellipse cx="70" cy="58" rx="5" ry="2.8" fill="#f7a1a8" opacity=".5"/>
+  ${mouth}
+  ${o.wow?'<path d="M22 26 l-7 -6 M78 26 l7 -6" stroke="#f0cf7a" stroke-width="2.4" stroke-linecap="round"/>':''}
+  ${o.sword?`<path d="M80 102 L100 50" stroke="${o.sword===1?'#d6dbe2':o.sword}" stroke-width="4" stroke-linecap="round"/><path d="M73 98 L87 105" stroke="#6b4a2e" stroke-width="4" stroke-linecap="round"/><circle cx="78" cy="104" r="4.3" fill="${skin}"/>`:''}
+  </svg>`}
 function chibi(g,pal={},o={}){
+  if(g==='f'&&!o.helmet)return heroF(pal,o);
   if(g==='m'&&!o.helmet&&!o.beard&&!pal.hair&&!pal.trim&&(!pal.robe||pal.robe==='#2b64b0'))return heroM(o);
   const robe=pal.robe||(g==='m'?'#2b64b0':'#4a8fdc'),hair=pal.hair||'#2b1d17',trim=pal.trim||'#d9a73a',skin='#fde3c8';
   let back='',top='';
@@ -1678,7 +1722,7 @@ function toast(m,cls){const t=document.createElement('div');t.className='toast '
 /* đi lại trong thành */
 function goTo(id,then){
   if(BUSY){toast('Đang bận, hãy chờ xong việc hiện tại.');return}
-  if(S.loc===id){S.tab=id==='home'?'home':'city';renderAll();openPanel();if(then)then();return}
+  if(S.loc===id){S.tab=id==='home'?'home':'city';renderAll();openPanel();ptip(id);if(then)then();return}
   const a=spot(S.loc),b=spot(id),mins=Math.round(clamp(Math.round(Math.hypot(a.x-b.x,a.y-b.y)/45),3,15)*tm('walk')),dur=mins/60;
   if(S.hour+dur>24&&id!=='home'){toast('Đã quá khuya để đi lại. Hãy về Phủ Đệ ngủ.');return}
   if(!S.speed)S.speed=10;
@@ -1691,7 +1735,7 @@ function arrive(b){
   S.loc=b.to;S.tab=b.to==='home'?'home':'city';
   if(S.quests&&!S.quests.visited.includes(b.to)){S.quests.visited.push(b.to);qev('visit')}
   const h=$('#hero');if(h)h.style.transition='transform .6s ease';
-  save();renderAll();openPanel();
+  save();renderAll();openPanel();ptip(b.to);
   if(b.then)b.then();
 }
 function openMap(){if(window.innerWidth>=960)return;const ms=document.querySelector('.mapscroll:not([hidden])');if(!ms)return;
@@ -1862,7 +1906,7 @@ function panelHtml(){
   const st=stats();
   switch(loc){
   case 'gate':
-    h+=B('Xem bản đồ ngoài thành','9 thành trì, mỏ sắt, bạc, vàng, đá quý, ruộng đất',()=>{S.tab='out';renderAll()},{cls:'pri'});break;
+    h+=B('Xem bản đồ ngoài thành','9 thành trì, mỏ sắt, bạc, vàng, đá quý, ruộng đất',()=>{S.tab='out';renderAll();ptip('out')},{cls:'pri'});break;
   case 'mieu':h+=mieuPanel();break;
   case 'tuulau':
     h+=aucSec();
@@ -2172,10 +2216,10 @@ function renderSheet(){
     [`Cưới ${S.gender==='m'?'thê thiếp':'phu quân'} đầu tiên`,S.partners.length>0],
     ['Chiếm vùng đất đầu tiên',Object.keys(S.lands).length>0],
     ['Đạt trình độ Chuyên gia một nghề',Object.keys(PROFS).some(k=>S.prof[k].l&&plv(k)>=4)],
-    ['Chiếm Mỏ Vàng Kim Sơn',!!S.lands.movang],
-    ['Chiếm Thành Lạc Dương, xưng bá',!!S.lands.lacduong],
+    ['Chiếm Mỏ Vàng Sơn Kim',!!S.lands.movang],
+    ['Chiếm Thành Lạt Đà, xưng bá',!!S.lands.lacduong],
     ['Thu phục đủ 9 thành trì',cities(S)>=9],
-    ['Chiếm Kinh thành Thăng Long, lên ngôi Hoàng đế',!!S.emperor],
+    ['Chiếm Kinh thành Long Thăng, lên ngôi Hoàng đế',!!S.emperor],
   ];
   const Q=S.quests,nx=WEATHER[S.wxNext]||WEATHER.may,allC=Q.list.every(q=>q.c);
   $('#questCard').innerHTML=`<h2>Bảng nhiệm vụ ngày<small>Ngày ${S.day}</small></h2>
@@ -2226,7 +2270,7 @@ document.addEventListener('click',e=>{
   const zn=e.target.closest('#mapHome .zone');if(zn){
     if(BUSY){toast('Đang bận, hãy chờ xong việc hiện tại.');return}
     if(zn.dataset.z==='gate'){S.tab='city';renderAll();return}
-    S.zone=zn.dataset.z;renderAll();openPanel();return}
+    S.zone=zn.dataset.z;renderAll();openPanel();ptip('z:'+S.zone);return}
   const pgb=e.target.closest('#mapOut [data-pg]');if(pgb){const old=outPg();S.cp2Pg=+pgb.dataset.pg;if(S.cp2Pg>chapU())toast(`Chiếm hết ${CHAP[S.cp2Pg-1].n} để mở chương này`);renderAll();const ms=$('#mapOut');if(ms)ms.scrollLeft=S.cp2Pg<old?ms.scrollWidth:0;return}
   const ld=e.target.closest('#mapOut .land');if(ld){S.selLand=ld.dataset.l;renderAll();openPanel();return}
 });
@@ -2236,7 +2280,7 @@ document.addEventListener('keydown',e=>{
 });
 $('#tabCity').onclick=()=>{S.tab='city';renderAll()};
 $('#tabHome').onclick=()=>{if(S.loc==='home'){S.tab='home';renderAll()}else goTo('home')};
-$('#tabOut').onclick=()=>{S.tab='out';renderAll()};
+$('#tabOut').onclick=()=>{S.tab='out';renderAll();ptip('out')};
 let resetArm=false;
 $('#resetBtn').onclick=()=>{
   if(!resetArm){resetArm=true;$('#resetBtn').textContent='Bấm lần nữa để xoá dữ liệu và chơi lại';setTimeout(()=>{resetArm=false;$('#resetBtn').textContent='Chơi lại từ đầu'},4000);return}
@@ -2265,7 +2309,7 @@ const STORY=[
     ${FX.roof(170,96,108,'#a3302a','#6b1d18')}${FX.lantern(130,100)}${FX.lantern(210,100)}
     <path d="M262 132 q-2 -18 8 -26 q10 8 8 26z" fill="#4f7d4a"/><path d="M280 134 q-2 -24 9 -34 q11 10 9 34z" fill="#3f6b3c"/><rect x="40" y="120" width="26" height="16" fill="#b8865a" rx="2"/><path d="M38 121 Q53 108 68 121" fill="#8a5a33"/>
     ${FX.ch('m',72,108,30,{robe:'#6b4a2e',trim:'#c9a24f'})}${FX.ch('f',98,110,28,{robe:'#c45a78'})}${FX.ch('m',230,118,22,{robe:'#2b64b0'})}`},
-  {t:'Kinh thành thất thủ',m:'Rồi giặc ngoại xâm tràn qua biên ải, câu kết với bọn phản loạn trong nước, đánh chiếm kinh thành Thăng Long. Khói lửa phủ kín trời, muôn dân ly tán, xã tắc lâm nguy.',
+  {t:'Kinh thành thất thủ',m:'Rồi giặc ngoại xâm tràn qua biên ải, câu kết với bọn phản loạn trong nước, đánh chiếm kinh thành Long Thăng. Khói lửa phủ kín trời, muôn dân ly tán, xã tắc lâm nguy.',
    svg:()=>FX.sky('s2','#2a0f12','#8a2e22','#e0703a')+`<g class="drift" opacity=".55" fill="#4a2a24"><ellipse cx="80" cy="50" rx="60" ry="20"/><ellipse cx="230" cy="40" rx="70" ry="22"/><ellipse cx="160" cy="70" rx="50" ry="14"/></g>
     <g class="glow" fill="#ffcf6a">${[[40,30],[90,60],[140,22],[200,55],[260,30],[300,70],[180,90],[60,90]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="1.2"/>`).join('')}</g>
     <path d="M20 180 V112 H40 V104 H52 V112 H268 V104 H280 V112 H300 V180Z" fill="#2a1414"/><g fill="#2a1414">${[60,80,100,120,200,220,240,260].map(x=>`<rect x="${x}" y="106" width="10" height="7"/>`).join('')}</g>
@@ -2280,7 +2324,7 @@ const STORY=[
     <line x1="168" y1="120" x2="168" y2="34" stroke="#3a2a1c" stroke-width="3.2"/><circle cx="168" cy="33" r="3" fill="#f0cf7a"/>
     <g class="wv"><path d="M170 36 Q205 30 236 40 Q214 52 238 64 Q204 74 170 66Z" fill="#c4271d" stroke="#7a1f1b" stroke-width="1"/><circle cx="200" cy="51" r="9" fill="#f0cf7a"/><circle cx="200" cy="51" r="5" fill="#c4271d"/></g>
     ${FX.ch('m',140,92,34,{robe:'#2b64b0'})}${FX.ch('m',72,124,26,{robe:'#8a5a33'})}${FX.ch('m',96,128,24,{robe:'#6b7a3a'})}${FX.ch('f',222,124,26,{robe:'#4f7d4a'})}${FX.ch('m',248,128,24,{robe:'#8a5a33'})}`},
-  {t:'Lên ngôi Hoàng đế',m:'Con đường còn dài: chiêu binh bãi mã, giành lại cố thổ, trấn áp phản loạn. Khi đủ 8 thành trì, hãy kéo quân về Thăng Long, giành lại kinh thành và lên ngôi Hoàng đế.',
+  {t:'Lên ngôi Hoàng đế',m:'Con đường còn dài: chiêu binh bãi mã, giành lại cố thổ, trấn áp phản loạn. Khi đủ 8 thành trì, hãy kéo quân về Long Thăng, giành lại kinh thành và lên ngôi Hoàng đế.',
    svg:()=>FX.sky('s4','#fbe2a0','#fdf0cf','#f6dc96')+`<g class="rays" style="transform-origin:160px 70px" opacity=".35">${Array.from({length:12},(_,i)=>`<path d="M160 70 L${160+200*Math.cos(i*Math.PI/6)} ${70+200*Math.sin(i*Math.PI/6)} L${160+200*Math.cos(i*Math.PI/6+.18)} ${70+200*Math.sin(i*Math.PI/6+.18)}Z" fill="#f0cf7a"/>`).join('')}</g>
     ${FX.cloud(40,30,1,.7)}${FX.cloud(285,40,1.1,.7)}
     <rect x="58" y="88" width="204" height="44" fill="#a3302a" stroke="#6b1d18"/>${[70,96,122,198,224,250].map(x=>`<rect x="${x-2.5}" y="88" width="5" height="44" fill="#7a1f1b"/>`).join('')}${FX.roof(160,88,210,'#e2b544','#9a6a14')}
@@ -2288,7 +2332,7 @@ const STORY=[
     <path d="M120 132 h80 l14 36 h-108z" fill="#e8d7b0" stroke="#b39a6a"/>${[0,1,2,3].map(i=>`<line x1="${118-i*3.5}" y1="${140+i*8}" x2="${202+i*3.5}" y2="${140+i*8}" stroke="#b39a6a"/>`).join('')}<rect x="0" y="166" width="320" height="14" fill="#c9a24f"/>
     ${[[30,60],[290,60]].map(([x,y])=>`<line x1="${x}" y1="170" x2="${x}" y2="${y}" stroke="#6b1d18" stroke-width="2.5"/><path class="wv" d="M${x+1} ${y} h22 l-5 8 l5 8 h-22z" fill="#d9a73a"/>`).join('')}
     ${FX.ch('m',142,96,38,{robe:'#e2b544',trim:'#a3302a'},{crown:1})}${FX.ch('m',70,138,26,{robe:'#2b64b0'})}${FX.ch('m',92,142,24,{robe:'#4f7d4a'})}${FX.ch('m',206,142,24,{robe:'#7a1f1b'})}${FX.ch('f',228,138,26,{robe:'#c45a78'})}`}];
-const FICTION='Nhân vật và địa danh chỉ là hư cấu, trùng tên để làm cho thân thuộc, không ám chỉ bất kì địa danh hay sự thật lịch sử nào.';
+const FICTION='Nhân vật và địa danh đều là hư cấu, không ám chỉ bất kì địa danh hay sự thật lịch sử nào.';
 let FILMON=false;
 FX.chm=(g,x,y,w,pal,o)=>`<g transform="translate(${2*x+w},0) scale(-1,1)">${FX.ch(g,x,y,w,pal,o)}</g>`;
 FX.night=(id,a,b)=>`<defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a||'#16203d'}"/><stop offset="1" stop-color="${b||'#3a3052'}"/></linearGradient><radialGradient id="${id}l" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffd27a" stop-opacity=".8"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient></defs>`;
@@ -2316,7 +2360,7 @@ const COMIC=[
     <g stroke="#ffd0a0" stroke-width="1.2" opacity=".5">${[70,84,98,112,126].map((y,i)=>`<line x1="${110+i*7}" y1="${y}" x2="${170+i*7}" y2="${y}"/>`).join('')}</g>
     <g class="march">${[[214,70],[262,72],[300,68]].map(([x,y])=>`<line x1="${x}" y1="${y+40}" x2="${x}" y2="${y-8}" stroke="#120808" stroke-width="2"/><path class="wv" d="M${x+1} ${y-8} h20 l-5 6 l5 6 h-20z" fill="#2a2a32"/>`).join('')}
     ${[[130,86],[160,90],[190,86],[220,90],[250,86],[280,90],[146,104],[176,108],[206,104],[236,108],[266,104],[296,108]].map(([x,y])=>FX.ch('m',x,y,26,SOLD,{helmet:1,angry:1})).join('')}</g>`},
-  {vb:'84 0 152 180',cap:'Kinh thành Thăng Long thất thủ.',sfx:['ẦM!','right:10px;bottom:10px;font-size:40px'],shake:1,snd:'boom',art:()=>STORY[1].svg()},
+  {vb:'84 0 152 180',cap:'Kinh thành Long Thăng thất thủ.',sfx:['ẦM!','right:10px;bottom:10px;font-size:40px'],shake:1,snd:'boom',art:()=>STORY[1].svg()},
   {vb:'0 -40 160 190',cap:'Khói lửa phủ kín trời, muôn dân ly tán. Xã tắc lâm nguy!',
    art:()=>`<rect y="-40" width="160" height="60" fill="#3a2a2a"/>`+FX.sky('i3','#3a2a2a','#7a5a4a','#a8846a')+`<g class="drift" fill="#2e2424" opacity=".6"><ellipse cx="40" cy="44" rx="50" ry="16"/><ellipse cx="130" cy="30" rx="50" ry="14"/></g>
     <g fill="#2a1a16"><path d="M0 104 h40 v-14 l10 -10 l10 10 v14 h20 v-20 l14 -12 l14 12 v20 h52 V150 H0Z"/></g><g fill="#ffb347">${[[46,80,12],[108,72,14]].map(([x,y,s],i)=>`<path class="fl" style="animation-delay:-${i*.2}s" d="M${x-s/2} ${y} Q${x-s/3} ${y-s} ${x} ${y-s*1.6} Q${x+s/3} ${y-s} ${x+s/2} ${y}Z"/>`).join('')}</g>
@@ -2340,7 +2384,7 @@ const COMIC=[
     <g fill="#c9d8a8" stroke="#8a9a6a" opacity=".7"><ellipse cx="50" cy="120" rx="34" ry="16"/><ellipse cx="150" cy="70" rx="40" ry="20"/><ellipse cx="260" cy="40" rx="44" ry="18"/></g>
     <path class="route" d="M24 134 Q70 110 100 118 T160 84 T224 70 T300 24" fill="none" stroke="#c4271d" stroke-width="3" stroke-linecap="round" stroke-dasharray="7 6"/><path d="M300 24 l-11 1 l6 8z" fill="#c4271d"/>
     ${[[30,128],[56,112],[84,120],[104,112],[126,100],[146,88],[166,82],[190,76],[212,72],[236,64],[256,52],[276,40],[60,56],[36,80],[120,140],[180,124],[240,110],[280,92],[150,40],[200,30]].map(([x,y],i)=>FX.flag(x,y,'#c4271d','pop',.2+i*.12)).join('')}`},
-  {vb:'0 -30 160 180',cap:'Đủ 8 thành trì, kéo quân về Thăng Long.',
+  {vb:'0 -30 160 180',cap:'Đủ 8 thành trì, kéo quân về Long Thăng.',
    art:()=>`<rect y="-30" width="160" height="40" fill="#f3b06b"/>`+FX.sky('m2','#f3b06b','#fbd99a','#fcecc8')+`<circle cx="120" cy="60" r="20" fill="#f7953f" opacity=".85"/><rect x="96" y="60" width="64" height="40" fill="#a3302a" stroke="#6b1d18"/><path d="M118 100 V82 Q128 72 138 82 V100Z" fill="#3a1410"/>${FX.roof(128,60,66,'#e2b544','#9a6a14')}
     <path d="M0 150 V100 Q80 90 160 100 V150Z" fill="#8a6a3a"/><g class="marR">${[[4,80],[30,84],[56,80],[16,104],[42,108],[68,104]].map(([x,y])=>FX.ch('m',x,y,28,ALLY,{helmet:1})).join('')}
     ${[[22,78],[62,76]].map(([x,y])=>`<line x1="${x}" y1="${y+30}" x2="${x}" y2="${y-24}" stroke="#3a2a1c" stroke-width="2"/><path class="wv" d="M${x+1} ${y-24} h20 l-5 6 l5 6 h-20z" fill="#c4271d"/><circle cx="${x+9}" cy="${y-18}" r="3" fill="#f0cf7a"/>`).join('')}</g>`},
@@ -2394,7 +2438,7 @@ function storyDlg(done){
 const GUIDE=[
   ['🌱 Cơ bản',[['⏳','Thời gian chỉ trôi khi nhân vật làm việc hoặc đi lại. Đứng yên thì thời gian dừng, cứ thong thả suy nghĩ.'],['🏛️','Bấm vào toà nhà để đi tới và chọn việc. Bấm ✕ trên đầu nhân vật để dừng việc.'],['⚡','Làm việc tốn thể lực. Ăn bánh bao, uống thuốc bổ hoặc về Phủ Đệ ngủ để hồi.'],['📜','Mỗi ngày có 3 nhiệm vụ thưởng bạc. Bấm "Tự làm" để nhân vật tự đi làm.'],['🎓','Học nghề ở Học Đường: Nông, Rèn, Y, Thương. Tay nghề càng cao, tiền công càng lớn.'],['🧾','Ai cũng phải đóng thuế trên tiền công và tiền bán hàng, 15 ngày đổi mức thuế một lần.']]],
   ['🏠 Phủ đệ',[['🏠','Chính phòng là gốc của phủ, các khu khác không được vượt cấp Chính phòng.'],['🌾','Ruộng vườn gieo hạt, 2 ngày sau gặt. Lò rèn, Dược phòng thuê thợ làm thay mỗi ngày.'],['💞','Cưới hỏi ở Hồng Nương Quán. Giao quản việc sẽ tăng sản lượng nhưng mỗi đêm giảm hài lòng. Cho nghỉ ở Hậu viện để hồi lại.'],['🏅','Nâng cấp, học nghề, chiếm đất đều tăng danh vọng. Đủ danh vọng sẽ thăng quan, có bổng lộc và được chiêu thêm lính.'],['🔨','Đệ Nhất Lâu đấu giá vật phẩm hỗ trợ. Từ ngày 40, cứ 10 ngày lại đấu giá một chí bảo.'],['⛩️','Từ ngày 30, Đất Thiêng mở ra để dựng Phật tự, Đạo quán hoặc Văn miếu.']]],
-  ['⚔️ Chinh chiến',[['💂','Chiêu mộ lính ở Trại Lính. Huấn luyện tăng sức mỗi lính nhưng tốn lúa, bạc nuôi quân hơn.'],['🗺️','Vào tab Ngoài thành, chọn vùng đất, xem đánh giá rồi xuất quân.'],['🛡️','Mỗi vùng cần đủ lính trấn giữ tối thiểu mới nộp sản vật. Thành trì 🏯 khó đánh hơn nhưng cho nhiều sản vật hơn.'],['🔥','15 ngày có một đợt phản loạn. Xem trước vùng bị nhắm và bổ sung lính. Vùng càng xa, phản loạn càng mạnh.'],['📈','Quân địch ở vùng chưa chiếm mạnh thêm sau mỗi 30 ngày, đánh sớm thì dễ hơn.'],['👑','Chiếm đủ 8 thành trì rồi đánh Thăng Long để lên ngôi Hoàng đế.']]]];
+  ['⚔️ Chinh chiến',[['💂','Chiêu mộ lính ở Trại Lính. Huấn luyện tăng sức mỗi lính nhưng tốn lúa, bạc nuôi quân hơn.'],['🗺️','Vào tab Ngoài thành, chọn vùng đất, xem đánh giá rồi xuất quân.'],['🛡️','Mỗi vùng cần đủ lính trấn giữ tối thiểu mới nộp sản vật. Thành trì 🏯 khó đánh hơn nhưng cho nhiều sản vật hơn.'],['🔥','15 ngày có một đợt phản loạn. Xem trước vùng bị nhắm và bổ sung lính. Vùng càng xa, phản loạn càng mạnh.'],['📈','Quân địch ở vùng chưa chiếm mạnh thêm sau mỗi 30 ngày, đánh sớm thì dễ hơn.'],['👑','Chiếm đủ 8 thành trì rồi đánh Long Thăng để lên ngôi Hoàng đế.']]]];
 function guideDlg(){
   const d=document.createElement('div');d.id='bk';document.body.appendChild(d);let i=0;
   const draw=()=>{d.innerHTML=`<div class="bx guide"><h3>📖 Cẩm nang tân thủ</h3><div class="gtabs">${GUIDE.map((g,k)=>`<button data-g="${k}" aria-pressed="${k===i}">${g[0]}</button>`).join('')}</div><ul class="gl">${GUIDE[i][1].map(([a,b])=>`<li><b>${a}</b><span>${b}</span></li>`).join('')}</ul><div class="row"><button id="gStory">🎬 Cốt truyện</button><button id="gNext" class="pri">${i<GUIDE.length-1?'Tiếp':'Vào chơi'}</button></div></div>`;
@@ -2479,6 +2523,32 @@ function musTick(endT){const x=MUS.ctx;if(!x||!MUS.mode||MUS.t0==null)return;con
     if(MUS.ai%16===0)padc([nf(c,r-5),nf(c,r-3),nf(c,r-1)],t,spb*8,c.pad);
     if(c.taiko){const s=MUS.ai%8;if(s===0)drum(t,.6,68);if(s===4)drum(t,.5,72);if(s===3||s===6)drum(t,.28,96);if(s===7)drum(t,.22,120);if(MUS.ai%2===1)drum(t,.07,190);if(bi%32>=28)drum(t+spb/4,.16,150)}else if(c.drum){const s=MUS.ai%8;if(s===0||s===4)drum(t,.3,100);else if(s===7)drum(t,.12,150);if(bi%32===30)drum(t+spb/4,.1,160)}
     MUS.ai++}}
+/* ---------- Cẩm nang theo toà nhà: hiện 1 lần khi lần đầu ghé ---------- */
+const PTIPS={
+  first:{ic:'🌱',t:'Bước đầu',l:[['⏳','Thời gian chỉ trôi khi nhân vật làm việc hoặc đi lại. Đứng yên thì thời gian dừng, cứ thong thả suy nghĩ.'],['🏛️','Bấm vào toà nhà để đi tới và chọn việc. Bấm ✕ trên đầu nhân vật để dừng việc.'],['⚡','Làm việc tốn thể lực. Ăn bánh bao, uống thuốc bổ hoặc về Phủ Đệ ngủ để hồi.'],['📜','Mỗi ngày có 3 nhiệm vụ thưởng bạc. Bấm "Tự làm" để nhân vật tự đi làm.']]},
+  home:{ic:'🏠',t:'Phủ Đệ',l:[['🛏️','Về Phủ Đệ ngủ để hồi đầy thể lực và sang ngày mới. Mỗi sáng lãnh địa và nhân công nộp sản vật.'],['🏠','Chính phòng là gốc của phủ, các khu khác không được vượt cấp Chính phòng.'],['🏅','Nâng cấp, học nghề, chiếm đất đều tăng danh vọng. Đủ danh vọng sẽ thăng quan, có bổng lộc và được chiêu thêm lính.']]},
+  'z:ruong':{ic:'🌾',t:'Ruộng vườn',l:[['🌱','Mỗi thửa gieo 1 hạt giống, 2 ngày sau chín thì gặt. Trời mưa lúa lớn nhanh hơn.'],['⬆️','Ruộng đạt cấp tối đa thì nâng cấp được từng thửa, mỗi cấp thửa đó cho thêm 15% lúa.']]},
+  'z:lo':{ic:'🔥',t:'Lò rèn trong phủ',l:[['⚒️','Thuê thợ rèn làm thay mỗi ngày, mua dụng cụ tốt để thợ làm ra nhiều hơn.'],['🗡️','Đao, kiếm, bảo kiếm trang bị cho lính, mỗi món cộng thêm sức chiến đấu.']]},
+  'z:duoc':{ic:'🏥',t:'Dược phòng',l:[['💊','Thuê thầy thuốc sắc thuốc bổ hồi thể lực.'],['🤕','Lính bị thương sau trận cần được chữa mới quay lại chiến đấu.']]},
+  'z:hauvien':{ic:'💞',t:'Hậu viện',l:[['🛏️','Người ở Hậu viện không quản việc sẽ hồi hài lòng mỗi đêm. Hậu viện cấp càng cao hồi càng nhiều.']]},
+  'z:doanhtrai':{ic:'💂',t:'Doanh trại',l:[['👥','Doanh trại càng cao, giới hạn lính càng lớn. Chức quan cũng giới hạn số lính.'],['🍽️','Mỗi đêm lính ăn lúa và lĩnh bạc. Quân cấp càng cao càng tốn.']]},
+  hongnuong:{ic:'💞',t:'Hồng Nương Quán',l:[['💍','Cưới hỏi cần đủ Mị lực và sính lễ.'],['🏠','Giao quản một khu trong phủ để tăng sản lượng, nhưng mỗi đêm giảm hài lòng. Cho nghỉ ở Hậu viện để hồi lại.']]},
+  tuulau:{ic:'🔨',t:'Đệ Nhất Lâu',l:[['🔒','Mỗi món có giá ẩn. Đặt cao hơn giá ẩn là thắng, thấp hơn thì mất trắng. Trả giá trần là chắc thắng.'],['🏆','Từ ngày 40, cứ 10 ngày mở phiên chí bảo 3 ngày. 2 chí bảo cùng cấp hợp thành 1 món cấp cao hơn.']]},
+  cho:{ic:'🛒',t:'Chợ Phiên',l:[['🥟','Mua bánh bao để hồi thể lực, mua hạt giống, quặng. Bán nông sản, binh khí lấy bạc.'],['🧾','Ai cũng phải đóng thuế trên tiền công và tiền bán hàng, 15 ngày đổi mức thuế một lần.'],['🥇','Đổi 500 bạc lấy 1 vàng thỏi ở mục Đổi vàng thỏi.']]},
+  hocduong:{ic:'🎓',t:'Học Đường',l:[['📚','Học nghề Nông, Rèn, Y, Thương. Tay nghề càng cao, tiền công càng lớn.'],['⏱️','Nghề thứ hai học được sau 15 ngày, nghề thứ ba, thứ tư cần chờ lâu hơn.']]},
+  yquan:{ic:'🌿',t:'Y Quán',l:[['💊','Nơi làm việc của thầy thuốc. Học nghề Y ở Học Đường mới nhận việc ở đây.']]},
+  thuonghoi:{ic:'⚖️',t:'Thương Hội',l:[['<i class="ag"></i>','Nơi làm việc của thương nhân. Học nghề Thương ở Học Đường mới nhận việc ở đây. Thương nhân mua rẻ, bán đắt hơn ở chợ.']]},
+  loren:{ic:'🔨',t:'Lò Rèn',l:[['⚒️','Nơi làm việc của thợ rèn. Học nghề Rèn ở Học Đường mới nhận việc ở đây.']]},
+  ruong:{ic:'🌾',t:'Ruộng Làng',l:[['🌾','Nơi làm việc của nông phu. Gặt ruộng làng được 40% so với ruộng nhà.']]},
+  mieu:{ic:'⛩️',t:'Đất Thiêng',l:[['🙏','Từ ngày 30 được dựng Phật tự, Đạo quán hoặc Văn miếu, mỗi nơi một lợi ích riêng.'],['🔁','Đổi sang công trình khác thì mất 1 cấp. Mỗi ngày tốn bạc và tài nguyên để duy trì.']]},
+  trailinh:{ic:'💂',t:'Trại Lính',l:[['👥','Chiêu mộ lính ở đây. Cần xây Doanh trại trong phủ để có chỗ cho lính.'],['💪','Huấn luyện tăng sức mỗi lính nhưng tốn lúa, bạc nuôi quân hơn. Võ lực của ngươi cũng cộng vào quân lực.']]},
+  out:{ic:'🗺️',t:'Ngoài thành',l:[['⚔️','Chọn vùng đất, xem đánh giá rồi xuất quân. Quân địch mạnh thêm sau mỗi 30 ngày, đánh sớm thì dễ hơn.'],['🛡️','Mỗi vùng cần đủ lính trấn giữ mới nộp sản vật. Thành trì 🏯 khó đánh hơn nhưng giàu hơn, vùng càng xa càng nhiều sản vật.'],['👷','Khi cả cột phía trước đã thuộc về ta, lính trấn thủ vùng phía sau hoá nhân công, chỉ tốn một nửa.'],['🔥','15 ngày có một đợt phản loạn. Xem trước vùng bị nhắm và bổ sung lính.'],['👑','Chiếm đủ 8 thành trì rồi đánh Long Thăng để lên ngôi Hoàng đế.']]}};
+let PTQ=[];
+function ptip(k){if(!S)return;S.ptip=S.ptip||{};if(k==='gate')k='out';for(const x of ['first',k])if(PTIPS[x]&&!S.ptip[x]&&!PTQ.includes(x))PTQ.push(x);if(PTQ.length)setTimeout(ptShow,350)}
+function ptShow(){if(!PTQ.length)return;if(document.getElementById('bk')){setTimeout(ptShow,900);return}
+  const ks=PTQ.splice(0);ks.forEach(k=>S.ptip[k]=1);save();const T=ks.map(k=>PTIPS[k]),M=T[T.length-1];
+  const d=document.createElement('div');d.id='bk';d.innerHTML=`<div class="bx guide"><h3>${M.ic} ${M.t}</h3>${T.map(t=>`${T.length>1?`<div class="gsub">${t.ic} ${t.t}</div>`:''}<ul class="gl">${t.l.map(([a,b])=>`<li><b>${a}</b><span>${b}</span></li>`).join('')}</ul>`).join('')}<div class="row"><button id="tOk" class="pri">Đã hiểu</button></div></div>`;
+  document.body.appendChild(d);d.querySelector('#tOk').onclick=()=>{d.remove();setTimeout(tipCheck,400)}}
 /* ---------- Hướng dẫn khi mở khoá ---------- */
 const TIPS=[
   {id:'nghe',ic:'🎓',t:'Nghề đầu tiên',c:()=>Object.values(S.prof).some(p=>p.l),l:[['🏛️','Tới nơi làm việc của nghề để nhận việc. Làm càng nhiều, tay nghề càng cao, tiền công càng lớn.'],['🏅','Mỗi bậc tay nghề còn cộng danh vọng. Lên Chuyên gia, Đại sư sẽ mở thêm việc mới.'],['📚','Nghề thứ hai học được sau 15 ngày, nghề thứ ba, thứ tư cần chờ lâu hơn.']]},
@@ -2490,7 +2560,7 @@ const TIPS=[
   {id:'doanhtrai',ic:'💂',t:'Doanh trại',c:()=>S.home.doanhtrai>0,l:[['👥','Doanh trại càng cao, giới hạn lính càng lớn. Chức quan cũng giới hạn số lính.'],['🍽️','Mỗi đêm lính ăn lúa và lĩnh bạc. Quân cấp càng cao càng tốn.']]},
   {id:'linh',ic:'⚔️',t:'Quân đội',c:()=>S.soldiers>0,l:[['💪','Huấn luyện ở Trại Lính để tăng sức mỗi lính. Võ lực của ngươi cũng cộng vào quân lực.'],['🗺️','Vào tab Ngoài thành, chọn vùng đất, xem đánh giá rồi xuất quân.']]},
   {id:'dat',ic:'🛡️',t:'Lãnh địa đầu tiên',c:()=>Object.keys(S.lands).length>0,l:[['💂','Mỗi vùng cần đủ lính trấn giữ tối thiểu mới nộp sản vật. Lính dư cộng thêm sản lượng.'],['🔥','Cứ 15 ngày có một đợt phản loạn. Xem trước vùng bị nhắm và bổ sung lính. Mỗi trận đều có thương vong.'],['🛡️','Chiếm hết cột đất phía sau thì các vùng phía trước được an toàn.']]},
-  {id:'thanh',ic:'🏯',t:'Thành trì',c:()=>cities(S)>0,l:[['<i class="ag"></i>','Thành trì cho sản vật nhiều hơn vùng thường 50%, nhưng quân thủ và phản loạn đều mạnh hơn.'],['👑','Đủ 8 thành trì thì có thể đánh Thăng Long để lên ngôi.']]},
+  {id:'thanh',ic:'🏯',t:'Thành trì',c:()=>cities(S)>0,l:[['<i class="ag"></i>','Thành trì cho sản vật nhiều hơn vùng thường 50%, nhưng quân thủ và phản loạn đều mạnh hơn.'],['👑','Đủ 8 thành trì thì có thể đánh Long Thăng để lên ngôi.']]},
   {id:'quan',ic:'🏅',t:'Bước vào quan lộ',c:()=>(S.rank||0)>0,l:[['📜','Có chức quan sẽ nhận bổng lộc mỗi đêm và được chiêu thêm lính.'],['⬆️','Danh vọng tăng sẽ tự thăng chức. Bấm vào thẻ danh vọng để xem các bậc quan.']]},
   {id:'quanphu',ic:'🧾',t:'Quan phủ',c:()=>(S.rank||0)>=3,l:[['⚖️','Từ Quan phủ, ngươi được tự đặt mức thuế cho cả vùng. Bấm vào thẻ thuế để đổi.']]},
   {id:'mieu',ic:'⛩️',t:'Đất Thiêng mở',c:()=>S.day>=30,l:[['🙏','Phật tự giúp giảm thương vong, Đạo quán tăng quân lực, Văn miếu tăng học thức.'],['🔁','Đổi sang công trình khác thì mất 1 cấp. Mỗi ngày tốn bạc và tài nguyên để duy trì.']]},
@@ -2500,7 +2570,7 @@ function tipCheck(){if(!S||!S.tips||BUSY||document.getElementById('bk'))return;c
   const d=document.createElement('div');d.id='bk';d.innerHTML=`<div class="bx guide"><h3>${t.ic} Mở khoá: ${t.id==='banda'?partnerWord():t.t}</h3><ul class="gl">${t.l.map(([a,b])=>`<li><b>${a}</b><span>${b}</span></li>`).join('')}</ul><div class="row"><button id="tGuide">📖 Cẩm nang</button><button id="tOk" class="pri">Đã hiểu</button></div></div>`;
   document.body.appendChild(d);d.querySelector('#tOk').onclick=()=>{d.remove();setTimeout(tipCheck,400)};d.querySelector('#tGuide').onclick=()=>{d.remove();guideDlg()}}
 /* ---------- Phiên bản & thông báo bảo trì ---------- */
-const GAME_VER=63,GAME_NOTES='Nhân vật nam mới: công tử búi tóc, áo lam khoác ngoài trắng, tay cầm quạt.';
+const GAME_VER=64,GAME_NOTES='Cẩm nang chia vào từng toà nhà, hiện 1 lần khi lần đầu ghé. Vẽ lại nhân vật nam, nữ. Đổi tên các địa danh, kinh thành nay là Long Thăng.';
 async function verWatch(){try{const c=window.claude;if(!c||typeof c.use!=='function')return;const db=await c.use('db');if(!db)return;
   db.doc('meta/version').onSnapshot(s=>{const d=s.exists?s.data():null;if(d&&+d.v>GAME_VER)verBanner(d)},()=>{})}catch(e){}}
 function verBanner(d){if(document.getElementById('verBar'))return;const b=document.createElement('div');b.id='verBar';
@@ -2513,7 +2583,7 @@ function verNews(){let seen=0;try{seen=+localStorage.getItem('nhansinh_ver')||0;
 let pickG='m';
 function showStart(){
   $('#game').hidden=true;$('#start').hidden=false;
-  $('#pickM').innerHTML=chibi('m')+'<b>Nam nhân</b><span>Công tử áo lam</span>';
+  $('#pickM').innerHTML=chibi('m')+'<b>Nam nhân</b><span>Công tử áo trắng</span>';
   $('#pickF').innerHTML=chibi('f')+'<b>Nữ nhân</b><span>Tiểu thư áo lam</span>';
   const sv=loadSaved();
   $('#contBox').innerHTML=sv?`<button class="big alt" id="contBtn" style="width:100%">Tiếp tục: ${esc(sv.name)} · Ngày ${sv.day}</button>`:'';
@@ -2576,7 +2646,7 @@ $('#startBtn').onclick=()=>{
   const nm=($('#nameIn').value||'').trim()||(pickG==='m'?'Lý Tiêu Dao':'Triệu Linh Nhi');
   const s=fresh(nm,pickG);s.tips={};
   s.log.unshift({d:1,t:'06:00',m:`${nm} dọn về Phủ Đệ nhỏ trong thành, thầm thề sẽ có ngày giành lại kinh thành.`});
-  musStart();storyDlg(()=>{begin(s);guideDlg()});
+  s.ptip={};musStart();storyDlg(()=>{begin(s)});
 };
 function begin(s){
   S=s;BUSY=null;heroKind={};$('#start').hidden=true;$('#game').hidden=false;
